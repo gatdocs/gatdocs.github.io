@@ -1,3 +1,0 @@
-.. This text will not be shown 
-   (but, for instance, in HTML might be 
-   rendered as an HTML comment)
