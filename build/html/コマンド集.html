@@ -1,0 +1,982 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>コマンド集 &#8212; manual 0.1 ドキュメント</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="Appendix" href="Appendix.html" />
+    <link rel="prev" title="Ansible" href="Ansible.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Appendix.html" title="Appendix"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="Ansible.html" title="Ansible"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">manual 0.1 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">コマンド集</a><ul>
+<li><a class="reference internal" href="#id2">はじめに</a></li>
+<li><a class="reference internal" href="#id3">コマンド集</a><ul>
+<li><a class="reference internal" href="#vim">vimコマンド</a></li>
+<li><a class="reference internal" href="#centos">Centosプロキシ設定</a></li>
+<li><a class="reference internal" href="#id4">Centos日本語キーボード設定</a></li>
+<li><a class="reference internal" href="#id5">ユーザー一覧確認</a></li>
+<li><a class="reference internal" href="#id6">ログインしているユーザーの確認</a></li>
+<li><a class="reference internal" href="#id7">指定した時間、シェルを停止、処理を遅延</a></li>
+<li><a class="reference internal" href="#id8">テンポラリファイル、ディレクトリの作成</a></li>
+<li><a class="reference internal" href="#id9">コマンドの実行時間の計測</a></li>
+<li><a class="reference internal" href="#id10">アーカイブファイルの解答</a></li>
+<li><a class="reference internal" href="#devel">develファイルの意味</a></li>
+<li><a class="reference internal" href="#diff">リモート(遠隔)でdiff取得</a></li>
+<li><a class="reference internal" href="#tty">ttyデバイス確認、シリアル接続</a></li>
+<li><a class="reference internal" href="#ssh-ssh">SSH鍵認証設定　※SSHでノンパスログインをする際は認証鍵リストに公開鍵を記載する！</a></li>
+<li><a class="reference internal" href="#ip">自身が使用しているグローバルIPを確認</a></li>
+<li><a class="reference internal" href="#id11">ホスト名確認</a></li>
+<li><a class="reference internal" href="#id12">所属グループ確認</a></li>
+<li><a class="reference internal" href="#id13">ファイルシステムの検査と修復をお行う</a></li>
+<li><a class="reference internal" href="#id14">ファイル権限について</a></li>
+<li><a class="reference internal" href="#id15">ユーザー一覧表示</a></li>
+<li><a class="reference internal" href="#id16">ユーザーパスワード表示</a></li>
+<li><a class="reference internal" href="#id17">バックアップファイル作成</a></li>
+<li><a class="reference internal" href="#id18">ユーザー作成時のデフォルトパラメータ</a></li>
+<li><a class="reference internal" href="#id19">ユーザー完全削除</a></li>
+<li><a class="reference internal" href="#id20">複数ファイルの中から特定の文字列を検索するときのコマンド</a></li>
+<li><a class="reference internal" href="#id21">終端ディレクトリまで全て表示</a></li>
+<li><a class="reference internal" href="#sed">sedで全文置換</a></li>
+<li><a class="reference internal" href="#find">findオプション</a></li>
+<li><a class="reference internal" href="#id22">ポート転送</a></li>
+<li><a class="reference internal" href="#rcs">RCS使用方法</a></li>
+<li><a class="reference internal" href="#id23">環境変数の表示</a></li>
+<li><a class="reference internal" href="#id24">シェル変数の表示</a></li>
+<li><a class="reference internal" href="#dns">参照DNSサーバーの場所</a></li>
+<li><a class="reference internal" href="#rsync">rsync</a></li>
+<li><a class="reference internal" href="#id25">圧縮と展開</a></li>
+<li><a class="reference internal" href="#id26">コマンドを定期的に見る</a></li>
+<li><a class="reference internal" href="#dig-domain-information-groper">digコマンド(domain information groperの略で、直訳すると「ドメイン情報の手探りツール」)</a></li>
+<li><a class="reference internal" href="#id27">diff別バージョン</a></li>
+<li><a class="reference internal" href="#id28">ファイルが最後に修正されて12日以上のファイルを削除</a></li>
+<li><a class="reference internal" href="#cron">cronのログ</a></li>
+<li><a class="reference internal" href="#id29">vimページ移動</a></li>
+<li><a class="reference internal" href="#id30">ファイルの所有者を変更</a></li>
+<li><a class="reference internal" href="#last">lastコマンド</a></li>
+<li><a class="reference internal" href="#var-log-messages">/var/log/messages</a></li>
+<li><a class="reference internal" href="#var-log-wtmp">/var/log/wtmp</a></li>
+<li><a class="reference internal" href="#id31">tty</a></li>
+<li><a class="reference internal" href="#pts">pts</a></li>
+<li><a class="reference internal" href="#id32">今自分が使っている端末がどれかを表示</a></li>
+<li><a class="reference internal" href="#id33">ログイン中の全ユーザーのターミナルにメッセージを表示（ブロードキャスト）</a></li>
+<li><a class="reference internal" href="#id34">ログイン中の特定ユーザーのターミナルにメッセージを表示</a></li>
+<li><a class="reference internal" href="#id35">ログイン中の特定ユーザーのターミナルにメッセージを表示2</a></li>
+<li><a class="reference internal" href="#dev-pts">/dev/pts</a></li>
+<li><a class="reference internal" href="#kill">プロセスをコマンド名でkill</a></li>
+<li><a class="reference internal" href="#id36">CentOSバージョン確認</a></li>
+<li><a class="reference internal" href="#id37">バイナリファイルを閲覧</a></li>
+<li><a class="reference internal" href="#id38">スクリプトのデバッグ</a></li>
+<li><a class="reference internal" href="#id39">システムコールのデバッグ</a></li>
+<li><a class="reference internal" href="#vi">vi</a></li>
+<li><a class="reference internal" href="#id40">連番ファイル、ディレクトリ一括作成</a></li>
+<li><a class="reference internal" href="#id41">サービス管理</a></li>
+<li><a class="reference internal" href="#ssh">SSHサーバーへのアクセス制限</a></li>
+<li><a class="reference internal" href="#id42">SSHサーバーの設定変更</a></li>
+<li><a class="reference internal" href="#id43">ネットワーク設定変更</a></li>
+<li><a class="reference internal" href="#id44">ネットワーク接続状態確認</a></li>
+<li><a class="reference internal" href="#id45">ネットワークの切断、接続(SSH時はタイピングミスに要注意)</a></li>
+<li><a class="reference internal" href="#grep">grepで行指定</a></li>
+<li><a class="reference internal" href="#systemctl-centos7service">systemctl(Centos7、今までのserviceコマンドの代わり)</a></li>
+<li><a class="reference internal" href="#systemd">systemd(起動時など)のログを確認</a></li>
+<li><a class="reference internal" href="#linux">Linuxでログを記録</a></li>
+<li><a class="reference internal" href="#id46">指定サイズのダミーファイル作成</a></li>
+<li><a class="reference internal" href="#centos7ip-network-manager">Centos7でのIP情報の設定など(Network Manager)</a></li>
+<li><a class="reference internal" href="#centos7-ifconfig">Centos7でのインターフェイス情報確認(ifconfigの代わり)</a></li>
+<li><a class="reference internal" href="#yum">yumコマンド</a></li>
+<li><a class="reference internal" href="#centos7">Centos7でのルーティング情報確認、設定</a></li>
+<li><a class="reference internal" href="#id47">今までのCentosと7のネットワーク環境の違い</a></li>
+<li><a class="reference internal" href="#hw">ハードウェア情報取得(HW)</a></li>
+<li><a class="reference internal" href="#id48">タブ保管プログラム、コマンド</a></li>
+<li><a class="reference internal" href="#rpm">rpm(レッドハットパッケージマネージャ)</a></li>
+<li><a class="reference internal" href="#id49">grepで前後検索</a></li>
+<li><a class="reference internal" href="#arp">ARPテーブルの確認、無効化</a></li>
+<li><a class="reference internal" href="#centos7firewalld-iptables">Centos7でのfirewalld(iptables)</a></li>
+<li><a class="reference internal" href="#centos7kill">Centos7でのプロセスkill</a></li>
+<li><a class="reference internal" href="#id50">Centos7でのホスト名変更</a></li>
+<li><a class="reference internal" href="#id51">パスワードの有効期限変更</a></li>
+<li><a class="reference internal" href="#id52">Centosログローテーション</a></li>
+<li><a class="reference internal" href="#id53">ユーザー定義ファイル</a></li>
+<li><a class="reference internal" href="#id54">グループ定義ファイル</a></li>
+<li><a class="reference internal" href="#id55">ユーザー作成等</a></li>
+<li><a class="reference internal" href="#id56">グループ作成等</a></li>
+<li><a class="reference internal" href="#id57">シャドウファイル</a></li>
+<li><a class="reference internal" href="#id58">ユーザーの情報確認</a></li>
+<li><a class="reference internal" href="#id59">標準出力とエラー出力の両方をファイルに書き出す</a></li>
+<li><a class="reference internal" href="#sudoers">sudoersファイルの設定</a></li>
+<li><a class="reference internal" href="#configure">インストール時に前回と同じ./configure設定を使用する。</a></li>
+<li><a class="reference internal" href="#mount">mountコマンド</a></li>
+<li><a class="reference internal" href="#id60">ファイルシステムの情報確認</a></li>
+<li><a class="reference internal" href="#i386">i386</a></li>
+<li><a class="reference internal" href="#yumrpm">yumとrpmの違い</a></li>
+<li><a class="reference internal" href="#swap">空きメモリ、Swap容量の確認</a></li>
+<li><a class="reference internal" href="#id61">ファイルのタイムスタンプを変更、ファイルを新規作成</a></li>
+<li><a class="reference internal" href="#id62">シェルスクリプトのデバッグ</a></li>
+<li><a class="reference internal" href="#id63">findコマンド詳細(ファイル検索)</a></li>
+<li><a class="reference internal" href="#treetree">treeコマンドが無い時の擬似tree</a></li>
+<li><a class="reference internal" href="#id66">標準入力から受取り、標準出力に書き出す。その際にフィルタの役割も果たす(データ編集)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="Ansible.html"
+                        title="前の章へ">Ansible</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="Appendix.html"
+                        title="次の章へ">Appendix</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/コマンド集.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>コマンド集<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id2">
+<h2>はじめに<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="line-block">
+<div class="line">本ドキュメントはLinuxで使用されるコマンドについて纏めたものとなります。</div>
+<div class="line">コマンドの詳細について知りたい方は各自調べて下さい。</div>
+<div class="line">また、コマンドを使用したことによっていかなる事象が発生しても責任は負いかねます。</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>コマンド集<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="vim">
+<h3>vimコマンド<a class="headerlink" href="#vim" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="line-block">
+<div class="line"><code class="docutils literal"><span class="pre">gg</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">shift+g</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">[n]x</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">[n]yy</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">dd</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">dw</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">de</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:%s/old/new/gc</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">Ctrl+g</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">u</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">nu</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">nonu</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">showmode</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">showmatch</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">ignorecase</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">autoindent</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">noautoindent</span></code></div>
+<div class="line"><code class="docutils literal"><span class="pre">:set</span> <span class="pre">all</span></code></div>
+</div>
+<p>単語ごとに移動
+<code class="docutils literal"><span class="pre">w</span></code></p>
+<p>単語ごとにバック移動
+<code class="docutils literal"><span class="pre">b</span></code>
+行末に移動
+<code class="docutils literal"><span class="pre">0</span></code>
+行頭に移動
+<code class="docutils literal"><span class="pre">$</span></code></p>
+</div>
+<div class="section" id="centos">
+<h3>Centosプロキシ設定<a class="headerlink" href="#centos" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>1./etc/profile を開く</p>
+<p>vi /etc/profile</p>
+<p>2.以下の行を追記
+| PROXY=』user-proxy.put:8080』 # proxyサーバのドメインとポートを指定
+| export http_proxy=$PROXY
+| export HTTP_PROXY=$PROXY
+| export https_proxy=$PROXY
+| export HTTPS_PROXY=$PROXY
+|</p>
+<p>3.ファイルを保存し以下を実行して設定を反映</p>
+<p>source /etc/profile</p>
+</div>
+<div class="section" id="id4">
+<h3>Centos日本語キーボード設定<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>1.キーボード確認</p>
+<p><code class="docutils literal"><span class="pre">cat</span> <span class="pre">/etc/sysconfig/keyboard</span></code></p>
+<p>2.設定ファイル編集</p>
+<p><code class="docutils literal"><span class="pre">vim</span> <span class="pre">/etc/sysconfig/keyboard</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">KEYTABLE</span><span class="o">=</span><span class="s2">&quot;jp106&quot;</span>
+<span class="n">MODEL</span><span class="o">=</span><span class="s2">&quot;jp106&quot;</span>
+<span class="n">LAYOUT</span><span class="o">=</span><span class="s2">&quot;jp&quot;</span>
+<span class="n">KEYBOARDTYPE</span><span class="o">=</span><span class="s2">&quot;pc&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>ユーザー一覧確認<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">cat</span> <span class="pre">/etc/passwd</span></code></p>
+</div>
+<div class="section" id="id6">
+<h3>ログインしているユーザーの確認<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">w</span></code></p>
+</div>
+<div class="section" id="id7">
+<h3>指定した時間、シェルを停止、処理を遅延<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">sleep</span> <span class="pre">10</span></code></p>
+</div>
+<div class="section" id="id8">
+<h3>テンポラリファイル、ディレクトリの作成<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">mktemp</span></code></p>
+<p><code class="docutils literal"><span class="pre">mktemp</span> <span class="pre">-d</span></code></p>
+</div>
+<div class="section" id="id9">
+<h3>コマンドの実行時間の計測<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>time [コマンド]</p>
+</div>
+<div class="section" id="id10">
+<h3>アーカイブファイルの解答<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>tar -xvzf apr-1.5.1.tar.gz</p>
+</div>
+<div class="section" id="devel">
+<h3>develファイルの意味<a class="headerlink" href="#devel" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>developmentの略、主に開発に関連したものが入っているパッケージ。
+開発用のツールだったり、コンポーネントだったり。
+動的な仕組み（機能がモジュール化されているもの）を使うソフトウェアの場合は、通常の使用でも必要になることもある</p>
+</div>
+<div class="section" id="diff">
+<h3>リモート(遠隔)でdiff取得<a class="headerlink" href="#diff" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ssh <a class="reference external" href="mailto:root&#37;&#52;&#48;stg-gbs-lb1-2&#46;put">root<span>&#64;</span>stg-gbs-lb1-2<span>&#46;</span>put</a> 「cat /usr/local/nginx1.9.4/conf/conf.d/gbs-dr-api_80.conf」 | diff - /usr/local/nginx1.9.4/conf/conf.d/gbs-dr-api_80.conf
+ssh <a class="reference external" href="mailto:root&#37;&#52;&#48;prd-gbs-bat1-1&#46;put">root<span>&#64;</span>prd-gbs-bat1-1<span>&#46;</span>put</a> 「cat /root/.swatchdogrc_gbs_archive_to_k2」 | diff - /root/.swatchdogrc_gbs_archive_to_k2
+ssh <a class="reference external" href="mailto:root&#37;&#52;&#48;prd-gbs-bat1-1&#46;put">root<span>&#64;</span>prd-gbs-bat1-1<span>&#46;</span>put</a> 「cat /root/scripts/make_to_monitor_ln_log.sh」 | diff - /root/scripts/make_to_monitor_ln_log.sh
+ssh <a class="reference external" href="mailto:root&#37;&#52;&#48;prd-gbs-bat1-1&#46;put">root<span>&#64;</span>prd-gbs-bat1-1<span>&#46;</span>put</a> 「cat /root/scripts/conf/swatch2applog.conf」 | diff - /root/scripts/conf/swatch2applog.conf
+ssh <a class="reference external" href="mailto:root&#37;&#52;&#48;prd-gbs-bat1-1&#46;put">root<span>&#64;</span>prd-gbs-bat1-1<span>&#46;</span>put</a> 「cat /root/scripts/swatchmail.sh」 | diff - /root/scripts/swatchmail.sh</p>
+</div>
+<div class="section" id="tty">
+<h3>ttyデバイス確認、シリアル接続<a class="headerlink" href="#tty" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ls -l /dev/tty.*
+cu l /dev/tty.usbmodem1421
+screen /dev/tty.usbmodem1421</p>
+</div>
+<div class="section" id="ssh-ssh">
+<h3>SSH鍵認証設定　※SSHでノンパスログインをする際は認証鍵リストに公開鍵を記載する！<a class="headerlink" href="#ssh-ssh" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>・鍵作成
+ssh-keygen
+・SSH認証鍵リスト
+/root/.ssh/authorized_keys
+・SSH自分の公開鍵
+/root/.ssh/id_rsa.pub</p>
+</div>
+<div class="section" id="ip">
+<h3>自身が使用しているグローバルIPを確認<a class="headerlink" href="#ip" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>curl httpbin.org/ip
+curl -v httpbin.org/ip
+curl inet-ip.info
+curl ipinfo.io</p>
+</div>
+<div class="section" id="id11">
+<h3>ホスト名確認<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>uname -n | grep gbs</p>
+</div>
+<div class="section" id="id12">
+<h3>所属グループ確認<a class="headerlink" href="#id12" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>id</p>
+</div>
+<div class="section" id="id13">
+<h3>ファイルシステムの検査と修復をお行う<a class="headerlink" href="#id13" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>fsck</p>
+</div>
+<div class="section" id="id14">
+<h3>ファイル権限について<a class="headerlink" href="#id14" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ファイル種別，パーミッション，ハード・リンクの数，オーナー名，グループ名，バイト・サイズ，タイム・スタンプ
+drwx——   5 nakatani    nakatani    4096 10月  4 17:47 2016 nakatani
+drwx——.  5 noga        noga        4096 10月 13 09:46 2015 noga
+drwxr-xr-x.  6 root        root        4096  3月 10 12:02 2016 ntjsss
+最初の１文字目はファイル種別を表しています。
+- ファイル
+d ディレクトリ
+l シンボリックリンク
+2文字目から4文字目はファイルの所有者に対する権限を表し、
+5文字目から7文字目はファイルの所有グループに対するを表し、
+8文字目から10文字目はその他に対する権限を表しています。</p>
+<p>Read=4　読み込み・表示
+Write=2　更新・上書き
+eXecute=1　ファイルの実行</p>
+</div>
+<div class="section" id="id15">
+<h3>ユーザー一覧表示<a class="headerlink" href="#id15" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>cat /etc/passwd</p>
+<p>ユーザー名、パスワード、ユーザーID、グループID、コメント（本名とか電話番号とか）ホームディレクトリ、ログインシェル
+↓下記のパスワードは暗号化されているか、xというパスワード
+pugiemonn:x:500:500::/home/pugiemonn:/bin/bash</p>
+</div>
+<div class="section" id="id16">
+<h3>ユーザーパスワード表示<a class="headerlink" href="#id16" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>cat /etc/shadow</p>
+</div>
+<div class="section" id="id17">
+<h3>バックアップファイル作成<a class="headerlink" href="#id17" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>cp -p /etc/fstab /etc/fstab.bak_`date 「+%Y%m%d_%H%M%S」`</p>
+</div>
+<div class="section" id="id18">
+<h3>ユーザー作成時のデフォルトパラメータ<a class="headerlink" href="#id18" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/etc/default/useradd</p>
+</div>
+<div class="section" id="id19">
+<h3>ユーザー完全削除<a class="headerlink" href="#id19" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>userdel -r sftpuser</p>
+</div>
+<div class="section" id="id20">
+<h3>複数ファイルの中から特定の文字列を検索するときのコマンド<a class="headerlink" href="#id20" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>find ./ -type f -print | xargs grep -i 『153.231.218.163』</p>
+</div>
+<div class="section" id="id21">
+<h3>終端ディレクトリまで全て表示<a class="headerlink" href="#id21" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>find ./ -type d -links 2</p>
+</div>
+<div class="section" id="sed">
+<h3>sedで全文置換<a class="headerlink" href="#sed" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>find ./ -type f -print | xargs sed -i 『s/hoge/fuga/g』</p>
+</div>
+<div class="section" id="find">
+<h3>findオプション<a class="headerlink" href="#find" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>find ./ -user admin
+find ./ -size +1000k
+find ./ -perm 755
+find ./ -mtime 2</p>
+</div>
+<div class="section" id="id22">
+<h3>ポート転送<a class="headerlink" href="#id22" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意のサーバーにログイン
+ローカルのポート18000 リモート側ホスト172.30.255.2:443</p>
+</div>
+<div class="section" id="rcs">
+<h3>RCS使用方法<a class="headerlink" href="#rcs" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>mkdir ./RCS
+ci -i -l file</p>
+<p>編集用にcheckout
+co -l file</p>
+<p>チェックイン、ファイルのパーミッションを444にする
+ci -u file
+チェックイン、ファイルのパーミッションを644にする
+ci -l file
+差分確認
+rcsdiff file</p>
+</div>
+<div class="section" id="id23">
+<h3>環境変数の表示<a class="headerlink" href="#id23" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>printenv</p>
+</div>
+<div class="section" id="id24">
+<h3>シェル変数の表示<a class="headerlink" href="#id24" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>set</p>
+</div>
+<div class="section" id="dns">
+<h3>参照DNSサーバーの場所<a class="headerlink" href="#dns" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/etc/resolv.conf</p>
+</div>
+<div class="section" id="rsync">
+<h3>rsync<a class="headerlink" href="#rsync" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>通常実行
+/usr/bin/rsync -haunvz –bwlimit 16384 <a class="reference external" href="mailto:root&#37;&#52;&#48;psr-bk2&#46;put">root<span>&#64;</span>psr-bk2<span>&#46;</span>put</a>:/data/data1/psr/db1/  /data/data1/psr/db1/
+バックグラウンド実行
+nohup /usr/bin/rsync -haunvz –bwlimit 16384 <a class="reference external" href="mailto:root&#37;&#52;&#48;psr-bk2&#46;put">root<span>&#64;</span>psr-bk2<span>&#46;</span>put</a>:/data/data1/psr/db1/  /data/data1/psr/db1/ &amp;</p>
+</div>
+<div class="section" id="id25">
+<h3>圧縮と展開<a class="headerlink" href="#id25" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>圧縮
+gzip -9v [file name]
+展開
+gzip -d [file name]</p>
+</div>
+<div class="section" id="id26">
+<h3>コマンドを定期的に見る<a class="headerlink" href="#id26" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>watch -n 1 「ps aufx | grep gzip」</p>
+</div>
+<div class="section" id="dig-domain-information-groper">
+<h3>digコマンド(domain information groperの略で、直訳すると「ドメイン情報の手探りツール」)<a class="headerlink" href="#dig-domain-information-groper" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div>⇒ネームサーバに対して問い合わせを行い、その応答結果を表示するコマンド</div></blockquote>
+<p>再帰問い合わせ
+dig google.com a &#64;8.8.8.8
+非再帰問い合わせ（反復問い合わせ）
+dig +norec google.com a &#64;a.dns.jp
+出力を答えのみに短くする
+dig +short google.com
+hostnameを問い合わせ
+dig -x 172.30.101.58</p>
+</div>
+<div class="section" id="id27">
+<h3>diff別バージョン<a class="headerlink" href="#id27" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>diff -s -y –left-column A B</p>
+</div>
+<div class="section" id="id28">
+<h3>ファイルが最後に修正されて12日以上のファイルを削除<a class="headerlink" href="#id28" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/usr/bin/find /tmp/ -type f -name 「*」 -mtime +12 -exec /bin/rm -fr *</p>
+</div>
+<div class="section" id="cron">
+<h3>cronのログ<a class="headerlink" href="#cron" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/var/log/cron</p>
+</div>
+<div class="section" id="id29">
+<h3>vimページ移動<a class="headerlink" href="#id29" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>コマンド    移動内容
+ctrl + u        半画面分 上へ
+ctrl + d        半画面分 下へ
+ctrl + b        一画面分 上へ
+ctrl + f        一画面分 下へ
+{       段落毎に上へ
+}       段落毎に下へ
+gg      そのファイルの先頭へ
+G       そのファイルの末尾へ</p>
+</div>
+<div class="section" id="id30">
+<h3>ファイルの所有者を変更<a class="headerlink" href="#id30" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>chown -R apache. /home/apache/logs/mile_expired_check</p>
+</div>
+<div class="section" id="last">
+<h3>lastコマンド<a class="headerlink" href="#last" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>各ユーザーのログイン履歴確認
+last
+各ユーザーの最後のログイン確認
+lastlog
+再起動の履歴確認
+last reboot</p>
+</div>
+<div class="section" id="var-log-messages">
+<h3>/var/log/messages<a class="headerlink" href="#var-log-messages" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>特定用途以外のログを記録</p>
+</div>
+<div class="section" id="var-log-wtmp">
+<h3>/var/log/wtmp<a class="headerlink" href="#var-log-wtmp" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ログイン履歴が記録されているファイル（バイナリファイルなので中身の確認はlessなどで出来ない）</p>
+</div>
+<div class="section" id="id31">
+<h3>tty<a class="headerlink" href="#id31" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>RS-232Cなどのシリアルインターフェースでコンピューターに接続するコンソール入力装置
+現在ではコンソールが用いられることもなくなったが、UNIXの仮想的なキャラクター端末のデバイス名として用いられるなどの形で今も名残をとどめている。</p>
+</div>
+<div class="section" id="pts">
+<h3>pts<a class="headerlink" href="#pts" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>仮想ターミナル（telnet や SSH 等のターミナルソフトで繋げている状態）</p>
+</div>
+<div class="section" id="id32">
+<h3>今自分が使っている端末がどれかを表示<a class="headerlink" href="#id32" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>tty</p>
+</div>
+<div class="section" id="id33">
+<h3>ログイン中の全ユーザーのターミナルにメッセージを表示（ブロードキャスト）<a class="headerlink" href="#id33" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>下記コマンドで入力待ち画面となるので、入力後「Ctrl+D」押下
+wall</p>
+</div>
+<div class="section" id="id34">
+<h3>ログイン中の特定ユーザーのターミナルにメッセージを表示<a class="headerlink" href="#id34" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>1.ログインユーザーを調査
+[<a class="reference external" href="mailto:nakatani&#37;&#52;&#48;d-stp1">nakatani<span>&#64;</span>d-stp1</a> ~]$ w</p>
+<blockquote>
+<div>09:40:25 up 186 days, 14:35, 140 users,  load average: 0.01, 0.02, 0.00</div></blockquote>
+<p>USER     TTY      FROM              LOGIN&#64;   IDLE   JCPU   PCPU WHAT
+ymorita  pts/0    172.25.100.139   Mon09    1:12m  0.35s  0.15s ssh -o ServerAliveInterval=60 db36c1.put
+yoshitak pts/1    172.25.100.114   Mon14   13:14m  0.19s  0.18s ssh -o ServerAliveInterval=60 psr-web1-2.put</p>
+<p>2.ユーザー名をwriteコマンドの次に追記するとメッセージをそのユーザーに送信することが出来る
+write ymorita</p>
+</div>
+<div class="section" id="id35">
+<h3>ログイン中の特定ユーザーのターミナルにメッセージを表示2<a class="headerlink" href="#id35" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>デバイスファイルにメッセージを送信
+echo 「I love you piyoko」 &gt; /dev/pts/1</p>
+</div>
+<div class="section" id="dev-pts">
+<h3>/dev/pts<a class="headerlink" href="#dev-pts" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>接続しているユーザとやり取りするための窓口となるファイルが置かれるディレクトリ</p>
+</div>
+<div class="section" id="kill">
+<h3>プロセスをコマンド名でkill<a class="headerlink" href="#kill" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>killall コマンド名
+killall firefox</p>
+</div>
+<div class="section" id="id36">
+<h3>CentOSバージョン確認<a class="headerlink" href="#id36" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>cat /etc/redhat-release</p>
+</div>
+<div class="section" id="id37">
+<h3>バイナリファイルを閲覧<a class="headerlink" href="#id37" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>strings</p>
+</div>
+<div class="section" id="id38">
+<h3>スクリプトのデバッグ<a class="headerlink" href="#id38" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>bash -x 「スクリプト名」
+bash -x /root/scripts/swatchmail.sh</p>
+</div>
+<div class="section" id="id39">
+<h3>システムコールのデバッグ<a class="headerlink" href="#id39" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>strace -p 1234
+strace -c ls /hoge
+strace /root/scripts/swatchmail.sh -o /tmp/</p>
+</div>
+<div class="section" id="vi">
+<h3>vi<a class="headerlink" href="#vi" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>.⇒直前のコマンドを繰り返す
+u⇒undo</p>
+<ul class="simple">
+<li>リダイレクト</li>
+</ul>
+<p>標準出力
+＞⇒ファイル書き込み
+＞＞⇒ファイル追記</p>
+<p>エラー出力
+２＞⇒エラーファイル書き込み
+２＞＆１⇒エラーと標準出力書き込み</p>
+<p>標準入力
+＜⇒ファイルの内容をコマンドの入力として渡す</p>
+</div>
+<div class="section" id="id40">
+<h3>連番ファイル、ディレクトリ一括作成<a class="headerlink" href="#id40" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>mkdir -p test{1..5}
+touch test{1..5}/tset.gz</p>
+</div>
+<div class="section" id="id41">
+<h3>サービス管理<a class="headerlink" href="#id41" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>systemctl
+一覧出力
+systemctl list-unit-files -t service</p>
+<p>systemctl stop postfix.service
+systemctl start postfix.service
+systemctl restart postfix.service
+systemctl status postfix.service
+systemctl reload postfix.service
+systemctl enable postfix.service
+systemctl disable postfix.service</p>
+</div>
+<div class="section" id="ssh">
+<h3>SSHサーバーへのアクセス制限<a class="headerlink" href="#ssh" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/etc/hosts.allow
+/etc/hosts.deny</p>
+</div>
+<div class="section" id="id42">
+<h3>SSHサーバーの設定変更<a class="headerlink" href="#id42" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/etc/ssh/sshd_config</p>
+</div>
+<div class="section" id="id43">
+<h3>ネットワーク設定変更<a class="headerlink" href="#id43" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>nmtui</p>
+</div>
+<div class="section" id="id44">
+<h3>ネットワーク接続状態確認<a class="headerlink" href="#id44" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>nmcli dev status</p>
+</div>
+<div class="section" id="id45">
+<h3>ネットワークの切断、接続(SSH時はタイピングミスに要注意)<a class="headerlink" href="#id45" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>nmcli dev disconnect enp0s3; nmcli dev connect enp0s3</p>
+</div>
+<div class="section" id="grep">
+<h3>grepで行指定<a class="headerlink" href="#grep" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>-A 行数   パターンにマッチした行に続く行を指定した行数だけ表示します。
+-B 行数   パターンにマッチした行の前の行を指定した行数だけ表示します。
+-C 行数   パターンにマッチした行の前後の行を指定した行数だけ表示します。
+-c      パターンにマッチした行の番号のみを表示します。</p>
+</div>
+<div class="section" id="systemctl-centos7service">
+<h3>systemctl(Centos7、今までのserviceコマンドの代わり)<a class="headerlink" href="#systemctl-centos7service" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>systemctl start docker          サービス起動
+systemctl stop docker           サービス停止
+systemctl restart docker        サービス再起動
+systemctl reload docker         サービスリロード
+systemctl status docker         サービスステータス表示
+systemctl status sshd -l        サービスステータス詳細表示
+systemctl enable docker         サービス自動起動有効
+systemctl disable docker        サービス自動起動無効
+systemctl is-enabled docker     サービス自動起動設定確認
+systemctl list-unit-files –type=service        サービス一覧</p>
+</div>
+<div class="section" id="systemd">
+<h3>systemd(起動時など)のログを確認<a class="headerlink" href="#systemd" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>journalctl
+最近のメッセージ表示
+journalctl -e
+最近のメッセージ表示(詳細も)
+journalctl -xe
+特定サービスのメッセージだけを表示
+journalctl -u sshd
+起動時からの全メッセージを表示（-b）
+journalctl -b
+journalctl -b 2          # 2回前の起動時のログを表示
+テイル
+journalctl -u
+起動メッセージ
+journalctl –dmesg</p>
+</div>
+<div class="section" id="linux">
+<h3>Linuxでログを記録<a class="headerlink" href="#linux" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>script /tmp/scriptlog.log</p>
+</div>
+<div class="section" id="id46">
+<h3>指定サイズのダミーファイル作成<a class="headerlink" href="#id46" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>・100MBのdummyファイルを作成
+fallocate -l 100m dummy
+・1GBのdummyファイルを作成
+fallocate -l 1g dummy</p>
+</div>
+<div class="section" id="centos7ip-network-manager">
+<h3>Centos7でのIP情報の設定など(Network Manager)<a class="headerlink" href="#centos7ip-network-manager" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>nmtui
+もしくは
+nmcli
+設定後はサービス再起動を行い設定を反映
+systemctl restart network</p>
+</div>
+<div class="section" id="centos7-ifconfig">
+<h3>Centos7でのインターフェイス情報確認(ifconfigの代わり)<a class="headerlink" href="#centos7-ifconfig" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ip addr show
+ip link
+ip -s link
+※ifconfigを使いたい場合はnet-toolsをインストール
+yum install net-tools</p>
+</div>
+<div class="section" id="yum">
+<h3>yumコマンド<a class="headerlink" href="#yum" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>yum install
+yum remove
+yum update
+yum search
+yum provides
+yum clean</p>
+</div>
+<div class="section" id="centos7">
+<h3>Centos7でのルーティング情報確認、設定<a class="headerlink" href="#centos7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>確認
+ip route show
+スタティックルート設定
+ip route add default via 192.168.122.1
+ip route add 10.10.20.0/24 via 192.168.50.100 dev eth0
+ip route del 10.10.20.0/24</p>
+<p>上記コマンドだと再起動時に消去されてしまう。永久に追加する場合は下記
+# vi /etc/sysconfig/network-scripts/route-eth0
+10.10.20.0/24 via 192.168.50.100 dev eth0</p>
+</div>
+<div class="section" id="id47">
+<h3>今までのCentosと7のネットワーク環境の違い<a class="headerlink" href="#id47" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>・net-tools      ・iproute2
+ifconfig        ip a(addr), ip l(link)
+route           ip r(route)
+netstat         ss -tan
+netstat -i      ip -s l(link)
+arp                     ip n(neighbor)</p>
+</div>
+<div class="section" id="hw">
+<h3>ハードウェア情報取得(HW)<a class="headerlink" href="#hw" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>dmidecode</p>
+</div>
+<div class="section" id="id48">
+<h3>タブ保管プログラム、コマンド<a class="headerlink" href="#id48" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>compgen -c | sort | uniq | wc -l</p>
+</div>
+<div class="section" id="rpm">
+<h3>rpm(レッドハットパッケージマネージャ)<a class="headerlink" href="#rpm" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>rpm -qa</p>
+</div>
+<div class="section" id="id49">
+<h3>grepで前後検索<a class="headerlink" href="#id49" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>grep -B 3(前の行検索)
+grep -A 3(後の行検索)</p>
+</div>
+<div class="section" id="arp">
+<h3>ARPテーブルの確認、無効化<a class="headerlink" href="#arp" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>確認
+ip n
+無効化
+ip n flush 192.168.122.71 dev eth0
+ip n del 192.168.122.71 dev eth0 (←エントリーを削除)</p>
+</div>
+<div class="section" id="centos7firewalld-iptables">
+<h3>Centos7でのfirewalld(iptables)<a class="headerlink" href="#centos7firewalld-iptables" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ゾーン情報確認
+firewall-cmd –list-all-zones
+デフォルトゾーンの確認
+firewall-cmd –get-default-zone
+デフォルトゾーンの変更
+firewall-cmd –set-default-zone=external
+ゾーンのインターフェイスを付け替える
+firewall-cmd –zone=trusted –change-interface=ens33</p>
+<p>定義されているサービス一覧
+firewall-cmd –get-services
+publicのサービス確認
+firewall-cmd –list-service –zone=public</p>
+<p>サービスを追加する
+firewall-cmd –add-service=http –zone=public
+恒久的にサービスを追加する
+firewall-cmd –add-service=http –zone=public –permanent
+サービスを削除する
+firewall-cmd –remove-service=dhcpv6-client –zone=public
+ICMPタイプの一覧表示
+firewall-cmd –get-icmptypes
+禁止されているICMPタイプを表示
+firewall-cmd –list-icmp-blocks –zone=public
+禁止されているICMPタイプに追加
+firewall-cmd –add-icmp-block=echo-request –zone=public
+恒久的に禁止されているICMPタイプに追加
+firewall-cmd –add-icmp-block=echo-request –zone=public –permanent
+禁止されるICMPタイプから削除
+firewall-cmd –remove-icmp-block=echo-request
+恒久的に禁止されるICMPタイプから削除
+firewall-cmd –remove-icmp-block=echo-request –permanent</p>
+<p>再起動
+firewall-cmd –reload
+GUIツール
+firewall-config</p>
+</div>
+<div class="section" id="centos7kill">
+<h3>Centos7でのプロセスkill<a class="headerlink" href="#centos7kill" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>systemctl kill -s 9 unit_name</p>
+</div>
+<div class="section" id="id50">
+<h3>Centos7でのホスト名変更<a class="headerlink" href="#id50" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>hostnamectl set-hostname new_host_name</p>
+</div>
+<div class="section" id="id51">
+<h3>パスワードの有効期限変更<a class="headerlink" href="#id51" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>karumaのパスワードの変更が可能な最小日数を3日にし、パスワードの有効日時を100日にする
+chage -m 3 -M 100 karuma</p>
+<p>パスワードの有効期限情報の確認
+chage -l karuma</p>
+</div>
+<div class="section" id="id52">
+<h3>Centosログローテーション<a class="headerlink" href="#id52" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>設定ファイル
+/etc/logrotate.conf
+インクルードファイル
+/etc/logrotate.d
+ログローテートCron
+/etc/cron.daily/logrotate</p>
+</div>
+<div class="section" id="id53">
+<h3>ユーザー定義ファイル<a class="headerlink" href="#id53" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/etc/passwd</p>
+</div>
+<div class="section" id="id54">
+<h3>グループ定義ファイル<a class="headerlink" href="#id54" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/etc/group</p>
+</div>
+<div class="section" id="id55">
+<h3>ユーザー作成等<a class="headerlink" href="#id55" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>追加
+useradd
+変更
+usermod
+削除
+userdel
+ログイン用パスワード
+passwd</p>
+<p>ユーザーIDを指定してuseraddする
+useradd -g users -u 1001 penguin
+-g グループを指定
+-u ユーザーIDを指定(指定しない場合は自動振り分け)</p>
+<p>既存ユーザーをグループに追加
+usermod -aG GROUPS USER</p>
+</div>
+<div class="section" id="id56">
+<h3>グループ作成等<a class="headerlink" href="#id56" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>グループIDが100のhoge-groupを作成
+groupadd -g 100 hoge-group
+グループ削除
+groupdel hoge-group</p>
+</div>
+<div class="section" id="id57">
+<h3>シャドウファイル<a class="headerlink" href="#id57" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>暗号化されたユーザーパスワードのファイル
+ユーザー
+/etc/shadow
+グループ
+/etc/gshadow</p>
+</div>
+<div class="section" id="id58">
+<h3>ユーザーの情報確認<a class="headerlink" href="#id58" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>id</p>
+</div>
+<div class="section" id="id59">
+<h3>標準出力とエラー出力の両方をファイルに書き出す<a class="headerlink" href="#id59" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>cat abc xxx &gt; nnn 2&gt;&amp;1</p>
+</div>
+<div class="section" id="sudoers">
+<h3>sudoersファイルの設定<a class="headerlink" href="#sudoers" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>visudo
+sudoの許可(wheelグループの許可)
+↓下記のコメントアウトを削除、」%wheel」をユーザー名に変更
+%wheel ALL=(ALL) ALL</p>
+</div>
+<div class="section" id="configure">
+<h3>インストール時に前回と同じ./configure設定を使用する。<a class="headerlink" href="#configure" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>スクリプトの為、そのまま利用できる。ファイルはソースツリーの上にある。
+/usr/local/src/httpd-2.4.16/config.nice
+make
+make install</p>
+</div>
+<div class="section" id="mount">
+<h3>mountコマンド<a class="headerlink" href="#mount" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>mountコマンド単体で実行することにより、現在のファイルシステムのマウント状態が確認できる</p>
+</div>
+<div class="section" id="id60">
+<h3>ファイルシステムの情報確認<a class="headerlink" href="#id60" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/etc/fstab</p>
+</div>
+<div class="section" id="i386">
+<h3>i386<a class="headerlink" href="#i386" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Intelの32ビットプロセッサ</p>
+</div>
+<div class="section" id="yumrpm">
+<h3>yumとrpmの違い<a class="headerlink" href="#yumrpm" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>基本的に yum を使って、yum が使えないところを rpm で補う
+・rpm と yum は別々のものではない。yum は内部で rpm を呼び出して、rpm よりもさらに高度な機能を提供しているもの
+・yum のほうが rpm よりも高機能なので、yum が使える場面では yum を使ったほうが便利。rpm は yum が使えない場面で使う</p>
+</div>
+<div class="section" id="swap">
+<h3>空きメモリ、Swap容量の確認<a class="headerlink" href="#swap" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>free</p>
+</div>
+<div class="section" id="id61">
+<h3>ファイルのタイムスタンプを変更、ファイルを新規作成<a class="headerlink" href="#id61" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意の日時を指定
+touch -d 201704132200 hoge.txt</p>
+</div>
+<div class="section" id="id62">
+<h3>シェルスクリプトのデバッグ<a class="headerlink" href="#id62" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>sh -xv test.sh</p>
+</div>
+<div class="section" id="id63">
+<h3>findコマンド詳細(ファイル検索)<a class="headerlink" href="#id63" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>/ルート配下のファイルを全検索(エラーは捨てる)
+find / -name hoge -type f 2&gt;/dev/null</p>
+<p>大文字小文字を区別しない
+find /home -iname hoge</p>
+<p>ディレクトリを検索
+find /home -type d</p>
+<p>ファイルを検索
+find /home -type f</p>
+<p>シンボリックリンクを検索
+find /home -type l</p>
+<p>1日以上前に変更されたファイルを検索
+find /home -mtime +1</p>
+<p>1日以上前にアクセスされたファイルを検索
+find /home -atime +1</p>
+<p>1日以上前にファイルステータスが変更されたファイルを検索
+find /home -ctime +1</p>
+<p>検索結果に対して別のコマンドを実行
+find /home -exec 実行コマンド {} ;</p>
+<p>find /home -exec rm -rf {} ;</p>
+</div>
+<div class="section" id="treetree">
+<h3>treeコマンドが無い時の擬似tree<a class="headerlink" href="#treetree" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>pwd;find . | sort | sed 『1d;s,[^/]*/,|    ,g;s/..//;s/[^ ]*$/<a href="#id64"><span class="problematic" id="id65">|</span></a>– &amp;/』</p>
+</div>
+<div class="section" id="id66">
+<h3>標準入力から受取り、標準出力に書き出す。その際にフィルタの役割も果たす(データ編集)<a class="headerlink" href="#id66" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>文字列置換(1行に複数文字列がある場合、最初の一箇所しか置換しない)
+cat samplefile | sed -e 「s/OldText/NewText/」
+sed -e 「s/OldText/NewText/」 samplefile</p>
+<p>文字列すべて置換
+cat samplefile | sed -e 「s/OldText/NewText/g」
+sed -e 「s/OldText/NewText/g」 samplefile</p>
+<p>指定の行のみ標準出力(2行目のみ)
+sed -n 『2p』 &lt; samplefile</p>
+<p>文字列の削除
+sed -e 「s/TextToRemove//g」</p>
+<p>行頭の文字列を削除
+sed -e 「s/^TextToRemove//」</p>
+<p>行末の文字列を削除
+sed -e 「s/TextToRemove$//」</p>
+<p>行頭の三文字をすべて削除
+sed -e 「s/^…//」</p>
+<p>行の全てをabcdという文字に置き換え
+sed -e 「s/.*/abcd/」</p>
+<p>Pattern文字列以降を削除
+sed -e 「s/Pattern.*//」</p>
+<p>sedのデリミタ(区切り文字)はなんでもOK。下記はすべて同じ
+sed -e 「s/abc/def/g」
+sed -e 「s%abc%def%g」
+sed -e 「s.abc.def.g」</p>
+<p>sedの特殊文字
+ドット【.】は任意の一文字を表す
+アスタリスク【*】は直前の文字が任意の個数連続した場合を表す(0個も含む)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Appendix.html" title="Appendix"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="Ansible.html" title="Ansible"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">manual 0.1 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, HN.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3 で生成しました。
+    </div>
+  </body>
+</html>

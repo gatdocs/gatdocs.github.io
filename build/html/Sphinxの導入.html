@@ -1,0 +1,370 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sphinxの導入 &#8212; manual 0.1 ドキュメント</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="Sphinxの運用" href="Sphinxの運用.html" />
+    <link rel="prev" title="各種マニュアル" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Sphinxの運用.html" title="Sphinxの運用"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="各種マニュアル"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">manual 0.1 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sphinxの導入</a><ul>
+<li><a class="reference internal" href="#id1">はじめに</a></li>
+<li><a class="reference internal" href="#id2">導入手順</a></li>
+<li><a class="reference internal" href="#id3">プロジェクトの作成</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="index.html"
+                        title="前の章へ">各種マニュアル</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="Sphinxの運用.html"
+                        title="次の章へ">Sphinxの運用</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Sphinxの導入.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sphinx">
+<h1>Sphinxの導入<a class="headerlink" href="#sphinx" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id1">
+<h2>はじめに<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>本ドキュメントはSphinx(ドキュメント作成ツール)の導入手順について説明したものとなります。</p>
+</div>
+<div class="section" id="id2">
+<h2>導入手順<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">本手順はWindowsを想定して書かれています。</p>
+</div>
+<ol class="arabic simple">
+<li>Pythonのインストール</li>
+</ol>
+<blockquote>
+<div><p>下記をダウンロードし、PCにPythonをインストールします。</p>
+<p><a class="reference download internal" href="_downloads/python-2.7.13.msi" download=""><code class="xref download docutils literal"><span class="pre">python-2.7.13.msi</span></code></a></p>
+<p>Install for all usersを選択しNextを押下。</p>
+<a class="reference internal image-reference" href="_images/Sphinx_Install_1.PNG"><img alt="_images/Sphinx_Install_1.PNG" src="_images/Sphinx_Install_1.PNG" style="width: 386.0px; height: 331.5px;" /></a>
+<p>Nextを押下。</p>
+<a class="reference internal image-reference" href="_images/Sphinx_Install_2.PNG"><img alt="_images/Sphinx_Install_2.PNG" src="_images/Sphinx_Install_2.PNG" style="width: 386.0px; height: 333.5px;" /></a>
+<p>デフォルトではpythonを環境変数に追加するオプションがオフになっています。これをオンにしてNextを押下。</p>
+<a class="reference internal image-reference" href="_images/Sphinx_Install_3.PNG"><img alt="_images/Sphinx_Install_3.PNG" src="_images/Sphinx_Install_3.PNG" style="width: 386.0px; height: 331.5px;" /></a>
+<p>オフ⇒オン</p>
+<a class="reference internal image-reference" href="_images/Sphinx_Install_4.PNG"><img alt="_images/Sphinx_Install_4.PNG" src="_images/Sphinx_Install_4.PNG" style="width: 386.0px; height: 331.5px;" /></a>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">ここでオフのままインストールを実施すると、後で手動で環境変数を追加する必要があります！下記のパスをシステムの環境変数に追加して下さい。</p>
+</div>
+<table border="1" class="colwidths-given docutils" id="id4">
+<caption><span class="caption-text"><strong>追加するパス</strong></span><a class="headerlink" href="#id4" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">パス</th>
+<th class="head">説明</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>C:¥Python27</td>
+<td>Pythonのコマンドが含まれるフォルダ</td>
+</tr>
+<tr class="row-odd"><td>C:¥Python27¥Scripts</td>
+<td>easy_installコマンドや、Sphinxのコマンドが格納されるフォルダ</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><p>インストールが開始されます。インストールが終了したらFinishを押下。</p>
+<a class="reference internal image-reference" href="_images/Sphinx_Install_5.PNG"><img alt="_images/Sphinx_Install_5.PNG" src="_images/Sphinx_Install_5.PNG" style="width: 386.0px; height: 331.5px;" /></a>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/Sphinx_Install_6.PNG"><img alt="_images/Sphinx_Install_6.PNG" src="_images/Sphinx_Install_6.PNG" style="width: 386.0px; height: 331.5px;" /></a>
+<p>コマンドプロンプトを起動し、 <code class="docutils literal"><span class="pre">python</span></code> とタイプします。pythonのバージョンが表示されていればインストール完了です。</p>
+<a class="reference internal image-reference" href="_images/Sphinx_Install_7.PNG"><img alt="_images/Sphinx_Install_7.PNG" src="_images/Sphinx_Install_7.PNG" style="width: 564.5px; height: 105.5px;" /></a>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Sphinxのインストール</li>
+</ol>
+<blockquote>
+<div><p>コマンドプロンプトを起動し、 <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code> とタイプします。自動でインストールが進行しますので、完了したら次のプロジェクトの作成に進みましょう。</p>
+<a class="reference internal image-reference" href="_images/Sphinx_Install_8.PNG"><img alt="_images/Sphinx_Install_8.PNG" src="_images/Sphinx_Install_8.PNG" style="width: 631.5px; height: 91.0px;" /></a>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>プロジェクトの作成<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ol class="arabic simple">
+<li>Sphinxでプロジェクトを作成するには、コマンドプロンプトで下記コマンドをタイプします。</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">sphinx-quickstart</span></code></p>
+<p>いくつか質問されます。絶対に回答しなければならないのは、次の項目です。任意の名前で大丈夫です。後は下記詳細を参照しながら回答して下さい。</p>
+</div></blockquote>
+<ul class="simple">
+<li>プロジェクト名</li>
+<li>バージョン番号</li>
+<li>著者の名前</li>
+</ul>
+<blockquote>
+<div><p>sphinx-quickstart詳細</p>
+<div class="highlight-rout"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">$ sphinx-quickstart</span>
+<span class="go">Welcome to the Sphinx quickstart utility.</span>
+
+<span class="go">Please enter values for the following settings (just press Enter to</span>
+<span class="go">accept a default value, if one is given in brackets).</span>
+
+<span class="go">Enter the root path for documentation.</span>
+<span class="gp">&gt; </span>Root path <span class="kr">for</span> the documentation <span class="p">[</span><span class="m">.</span><span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑ドキュメントのルートパス省略時は今の場所</span>
+
+<span class="go">You have two options for placing the build directory for Sphinx output.</span>
+<span class="go">Either, you use a directory &quot;_build&quot; within the root path, or you separate</span>
+<span class="go">&quot;source&quot; and &quot;build&quot; directories within the root path.</span>
+<span class="gp">&gt; </span>Separate <span class="kn">source</span> and build directories <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑ソースと、ビルド結果のフォルダを完全に分けるかどうか。</span>
+<span class="go"># デフォルトはソースのフォルダ内に_buildディレクトリができる。</span>
+
+<span class="go">Inside the root directory, two more directories will be created; &quot;_templates&quot;</span>
+<span class="go">for custom HTML templates and &quot;_static&quot; for custom stylesheets and other static</span>
+<span class="go">files. You can enter another prefix (such as &quot;.&quot;) to replace the underscore.</span>
+<span class="gp">&gt; </span>Name prefix <span class="kr">for</span> templates and static dir <span class="p">[</span>_<span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑Sphinxの作るシステムディレクトリの名前の先頭に付く接頭辞。デフォルトは&#39;_&#39;</span>
+
+<span class="go">The project name will occur in several places in the built documentation.</span>
+<span class="gp">&gt; </span>Project name<span class="o">:</span> Book Review
+<span class="gp">&gt; </span>Author name<span class="p">(</span>s<span class="p">)</span><span class="o">:</span> Your Name
+<span class="go"># ↑プロジェクト名と著者名。回答が必要です。</span>
+
+<span class="go">Sphinx has the notion of a &quot;version&quot; and a &quot;release&quot; for the</span>
+<span class="go">software. Each version can have multiple releases. For example, for</span>
+<span class="go">Python the version is something like 2.5 or 3.0, while the release is</span>
+<span class="go">something like 2.5.1 or 3.0a1.  If you don&#39;t need this dual structure,</span>
+<span class="go">just set both to the same value.</span>
+<span class="gp">&gt; </span>Project <span class="kp">version</span><span class="o">:</span> <span class="m">2010.03.31</span>
+<span class="gp">&gt; </span>Project release <span class="p">[</span><span class="m">2010.03.31</span><span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑プロジェクトのバージョン。versionは荒く、releaseは細かい。</span>
+<span class="go"># versionは必須だけど、releaseはデフォルトでversionと同じものが入る</span>
+
+<span class="go">The file name suffix for source files. Commonly, this is either &quot;.txt&quot;</span>
+<span class="go">or &quot;.rst&quot;.  Only files with this suffix are considered documents.</span>
+<span class="gp">&gt; </span>Source file suffix <span class="p">[</span><span class="m">.</span>rst<span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑ソースファイルのデフォルトの拡張子。デフォルトは.rst。.txtも良く使われる。</span>
+
+<span class="go">One document is special in that it is considered the top node of the</span>
+<span class="go">&quot;contents tree&quot;, that is, it is the root of the hierarchical structure</span>
+<span class="go">of the documents. Normally, this is &quot;index&quot;, but if your &quot;index&quot;</span>
+<span class="go">document is a custom template, you can also set this to another filename.</span>
+<span class="gp">&gt; </span>Name of your master document <span class="p">(</span>without suffix<span class="p">)</span> <span class="p">[</span>index<span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑ドキュメントのトップページ(マスター)のファイル名(拡張子なし)。デフォルトは&#39;index&#39;</span>
+
+<span class="go">Please indicate if you want to use one of the following Sphinx extensions:</span>
+<span class="gp">&gt; </span>autodoc<span class="o">:</span> automatically insert docstrings from modules <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>doctest<span class="o">:</span> automatically test code snippets <span class="kr">in</span> doctest blocks <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>intersphinx<span class="o">:</span> link between Sphinx documentation of different projects <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>todo<span class="o">:</span> write <span class="s">&quot;todo&quot;</span> entries that can be shown or hidden on build <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>coverage<span class="o">:</span> checks <span class="kr">for</span> documentation coverage <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>pngmath<span class="o">:</span> include math<span class="p">,</span> rendered as PNG images <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>jsmath<span class="o">:</span> include math<span class="p">,</span> rendered <span class="kr">in</span> the browser by JSMath <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>ifconfig<span class="o">:</span> conditional inclusion of content based on config values <span class="p">(</span>y<span class="o">/</span>N<span class="p">)</span> <span class="p">[</span>n<span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑各種拡張機能をインストールするかどうか。必要なら後で追加できます。</span>
+
+<span class="go">A Makefile and a Windows command file can be generated for you so that you</span>
+<span class="go">only have to run e.g. `make html&#39; instead of invoking sphinx-build</span>
+<span class="go">directly.</span>
+<span class="gp">&gt; </span>Create Makefile<span class="o">?</span> <span class="p">(</span>Y<span class="o">/</span>n<span class="p">)</span> <span class="p">[</span>y<span class="p">]</span><span class="o">:</span>
+<span class="gp">&gt; </span>Create Windows command <span class="kp">file</span><span class="o">?</span> <span class="p">(</span>Y<span class="o">/</span>n<span class="p">)</span> <span class="p">[</span>y<span class="p">]</span><span class="o">:</span>
+<span class="go"># ↑ビルド用のMakefileとバッチファイルを作るかどうか。デフォルトはY。作りましょう。</span>
+
+
+<span class="go">Finished: An initial directory structure has been created.</span>
+
+<span class="go">You should now populate your master file ./index.rst and create other documentation</span>
+<span class="go">source files. Use the Makefile to build the docs, like so:</span>
+<span class="go">make builder</span>
+<span class="go">where &quot;builder&quot; is one of the supported builders, e.g. html, latex or linkcheck.</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>雛形は出来ました。後はページを作っていきましょう。</li>
+</ol>
+<blockquote>
+<div>参照元:<a class="reference external" href="http://sphinx-users.jp/gettingstarted/install_windows.html">http://sphinx-users.jp/gettingstarted/install_windows.html</a></div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Sphinxの運用.html" title="Sphinxの運用"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="各種マニュアル"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">manual 0.1 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, HN.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3 で生成しました。
+    </div>
+  </body>
+</html>

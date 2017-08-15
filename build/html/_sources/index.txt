@@ -1,0 +1,49 @@
+.. manual documentation master file, created by
+   sphinx-quickstart on Thu Jul 20 07:45:44 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+====================================
+各種マニュアル
+====================================
+
+Sphinx
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   Sphinxの導入
+   Sphinxの運用
+
+reST記法
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   reST記法のよく使うもの
+   reST記法のまとめ
+
+Ansible
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   Ansible
+
+Appendix
+=================
+
+.. toctree::
+   :maxdepth: 2
+
+   Appendix
+
+索引
+=======================
+
+- :ref:`genindex`
+- :ref:`modindex`
+- :ref:`search`

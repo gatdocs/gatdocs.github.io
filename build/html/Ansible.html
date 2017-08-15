@@ -1,0 +1,654 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ansible &#8212; manual 0.1 ドキュメント</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="コマンド集" href="コマンド集.html" />
+    <link rel="prev" title="reST記法のまとめ" href="reST記法のまとめ.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="コマンド集.html" title="コマンド集"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="reST記法のまとめ.html" title="reST記法のまとめ"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">manual 0.1 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Ansible</a><ul>
+<li><a class="reference internal" href="#id1">はじめに</a></li>
+<li><a class="reference internal" href="#id2">インストール手順</a></li>
+<li><a class="reference internal" href="#id3">Ansibleのメリット</a></li>
+<li><a class="reference internal" href="#id4">Ansibleの構成要素</a></li>
+<li><a class="reference internal" href="#id5">ベストプラクティス</a></li>
+<li><a class="reference internal" href="#id6">モジュール</a></li>
+<li><a class="reference internal" href="#ansible-playbook">Ansible Playbookサンプル</a></li>
+<li><a class="reference internal" href="#playbook">ログ収集Playbook</a></li>
+<li><a class="reference internal" href="#id7">システム情報収集Playbook</a></li>
+<li><a class="reference internal" href="#id8">Playbook実行結果</a></li>
+<li><a class="reference internal" href="#id9">トラブルシューティング</a></li>
+<li><a class="reference internal" href="#ansible-galaxy">Ansible Galaxy</a></li>
+<li><a class="reference internal" href="#id10">リリースノート</a></li>
+<li><a class="reference internal" href="#id11">バージョン</a></li>
+<li><a class="reference internal" href="#id12">イシュー</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="reST記法のまとめ.html"
+                        title="前の章へ">reST記法のまとめ</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="コマンド集.html"
+                        title="次の章へ">コマンド集</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Ansible.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ansible">
+<h1>Ansible<a class="headerlink" href="#ansible" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id1">
+<h2>はじめに<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>本ドキュメントは構成管理ツールであるAnsibleの導入手順について説明したものとなります。</p>
+</div>
+<div class="section" id="id2">
+<h2>インストール手順<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<div class="last line-block">
+<div class="line">本手順はCentOS7.2を想定して書かれています。</div>
+<div class="line">尚、作業の際はrootで作業することを想定しています。</div>
+<div class="line">事前にOSが正常にセットアップされているものとします。</div>
+</div>
+</div>
+<ol class="arabic simple">
+<li>YUMリポジトリにEPELを追加</li>
+</ol>
+<p><code class="docutils literal"><span class="pre">#</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">epel-release</span></code></p>
+<ol class="arabic simple" start="2">
+<li>Ansibleのインストール</li>
+</ol>
+<p><code class="docutils literal"><span class="pre">#</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">-y</span> <span class="pre">--enablerepo=epel</span> <span class="pre">ansible</span></code></p>
+<ol class="arabic simple" start="3">
+<li>バージョンの確認</li>
+</ol>
+<p><code class="docutils literal"><span class="pre">#</span> <span class="pre">ansible</span> <span class="pre">--version</span></code></p>
+<ol class="arabic simple" start="4">
+<li>Ansibleの動作確認</li>
+</ol>
+<p><code class="docutils literal"><span class="pre">#</span> <span class="pre">ansible</span> <span class="pre">-m</span> <span class="pre">ping</span> <span class="pre">127.0.0.1</span></code></p>
+<div class="admonition hint">
+<p class="first admonition-title">ヒント</p>
+<p class="last">結果に <strong>SUCCESS</strong> が表示されていること</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<div class="last line-block">
+<div class="line">バージョンを指定してインストールする場合、別途手順となります。</div>
+<div class="line">詳細は下記を参照のこと。</div>
+<div class="line">参照先:<a class="reference external" href="http://docs.ansible.com/ansible/intro_installation.html#latest-release-via-yum">http://docs.ansible.com/ansible/intro_installation.html#latest-release-via-yum</a></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>Ansibleのメリット<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ansibleには下記のような利点があります。このことからAnsibleは構成管理ツールとして優位性があると考えられます。</p>
+<ul class="simple">
+<li>冪等性</li>
+<li>エージェントレス</li>
+<li>モジュールによる拡張</li>
+<li>コードがシンプル</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>Ansibleの構成要素<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ansibleを使いこなすにあたって特に重要な3つの要素を記載します。</p>
+<ul class="simple">
+<li>インベントリファイル</li>
+</ul>
+<p>Ansibleの実行対象を記述したファイルとなります。 <code class="docutils literal"><span class="pre">/etc/ansible/hosts</span></code> に下記を追記します。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">testservers</span><span class="p">]</span>
+<span class="n">test01</span> <span class="n">ansible_host</span><span class="o">=</span><span class="s2">&quot;対象サーバのIPアドレス&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">ansible</span> <span class="pre">all</span> <span class="pre">-m</span> <span class="pre">ping</span></code> を実行し、対象サーバが <strong>SUCCESS</strong> となることを確認しましょう。</p>
+<ul class="simple">
+<li>Playbook</li>
+</ul>
+<p>Ansibleの実行処理をコードで記述したものとなります。このYML形式のコードを元にAnsibleは処理を実行します。</p>
+<ul class="simple">
+<li>コンフィグファイル</li>
+</ul>
+<div class="line-block">
+<div class="line">Ansibleの設定情報が記載されています。</div>
+<div class="line">設定変更が必要な際 <code class="docutils literal"><span class="pre">/etc/ansible/ansible.cfg</span></code> を編集します。</div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>ベストプラクティス<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Playbookを作成するうえで、可読性、運用性を高めるために最適なディレクトリ構造があります。作成にとりかかる前に理解をしておきましょう。</p>
+<ul class="simple">
+<li>ディレクトリ構造</li>
+</ul>
+<p>公式ドキュメントより:<a class="reference external" href="http://docs.ansible.com/ansible/playbooks_best_practices.html">http://docs.ansible.com/ansible/playbooks_best_practices.html</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">production</span>                <span class="c1"># inventory file for production servers</span>
+<span class="n">staging</span>                   <span class="c1"># inventory file for staging environment</span>
+
+<span class="n">group_vars</span><span class="o">/</span>
+   <span class="n">group1</span>                 <span class="c1"># here we assign variables to particular groups</span>
+   <span class="n">group2</span>                 <span class="c1"># &quot;&quot;</span>
+<span class="n">host_vars</span><span class="o">/</span>
+   <span class="n">hostname1</span>              <span class="c1"># if systems need specific variables, put them here</span>
+   <span class="n">hostname2</span>              <span class="c1"># &quot;&quot;</span>
+
+<span class="n">library</span><span class="o">/</span>                  <span class="c1"># if any custom modules, put them here (optional)</span>
+<span class="n">filter_plugins</span><span class="o">/</span>           <span class="c1"># if any custom filter plugins, put them here (optional)</span>
+
+<span class="n">site</span><span class="o">.</span><span class="n">yml</span>                  <span class="c1"># master playbook</span>
+<span class="n">webservers</span><span class="o">.</span><span class="n">yml</span>            <span class="c1"># playbook for webserver tier</span>
+<span class="n">dbservers</span><span class="o">.</span><span class="n">yml</span>             <span class="c1"># playbook for dbserver tier</span>
+
+<span class="n">roles</span><span class="o">/</span>
+    <span class="n">common</span><span class="o">/</span>               <span class="c1"># this hierarchy represents a &quot;role&quot;</span>
+        <span class="n">tasks</span><span class="o">/</span>            <span class="c1">#</span>
+            <span class="n">main</span><span class="o">.</span><span class="n">yml</span>      <span class="c1">#  &lt;-- tasks file can include smaller files if warranted</span>
+        <span class="n">handlers</span><span class="o">/</span>         <span class="c1">#</span>
+            <span class="n">main</span><span class="o">.</span><span class="n">yml</span>      <span class="c1">#  &lt;-- handlers file</span>
+        <span class="n">templates</span><span class="o">/</span>        <span class="c1">#  &lt;-- files for use with the template resource</span>
+            <span class="n">ntp</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">j2</span>   <span class="c1">#  &lt;------- templates end in .j2</span>
+        <span class="n">files</span><span class="o">/</span>            <span class="c1">#</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">txt</span>       <span class="c1">#  &lt;-- files for use with the copy resource</span>
+            <span class="n">foo</span><span class="o">.</span><span class="n">sh</span>        <span class="c1">#  &lt;-- script files for use with the script resource</span>
+        <span class="nb">vars</span><span class="o">/</span>             <span class="c1">#</span>
+            <span class="n">main</span><span class="o">.</span><span class="n">yml</span>      <span class="c1">#  &lt;-- variables associated with this role</span>
+        <span class="n">defaults</span><span class="o">/</span>         <span class="c1">#</span>
+            <span class="n">main</span><span class="o">.</span><span class="n">yml</span>      <span class="c1">#  &lt;-- default lower priority variables for this role</span>
+        <span class="n">meta</span><span class="o">/</span>             <span class="c1">#</span>
+            <span class="n">main</span><span class="o">.</span><span class="n">yml</span>      <span class="c1">#  &lt;-- role dependencies</span>
+        <span class="n">library</span><span class="o">/</span>          <span class="c1"># roles can also include custom modules</span>
+        <span class="n">lookup_plugins</span><span class="o">/</span>   <span class="c1"># or other types of plugins, like lookup in this case</span>
+
+    <span class="n">webtier</span><span class="o">/</span>              <span class="c1"># same kind of structure as &quot;common&quot; was above, done for the webtier role</span>
+    <span class="n">monitoring</span><span class="o">/</span>           <span class="c1"># &quot;&quot;</span>
+    <span class="n">fooapp</span><span class="o">/</span>               <span class="c1"># &quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>モジュール<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Playbookはモジュールを組み合わせて作成されます。モジュールの一覧は公式ドキュメントにありますが、見難いので代表的なものをピックアップします。</p>
+<p>公式ドキュメント:<a class="reference external" href="http://docs.ansible.com/ansible/modules_by_category.html">http://docs.ansible.com/ansible/modules_by_category.html</a></p>
+<ul class="simple">
+<li>file</li>
+</ul>
+<p>ファイルやシンボリックリンクやディレクトリを作成したり、削除したり、属性変更するモジュール。</p>
+<ul class="simple">
+<li>copy</li>
+</ul>
+<p>ローカルにあるファイルやディレクトリを、対象サーバにコピーする。</p>
+<ul class="simple">
+<li>shell</li>
+</ul>
+<p>クライアント側でコマンドを実行する。</p>
+<ul class="simple">
+<li>fetch</li>
+</ul>
+<p>対象サーバからローカルにファイルを取得する。Copyモジュールとの違いに注意。</p>
+</div>
+<div class="section" id="ansible-playbook">
+<h2>Ansible Playbookサンプル<a class="headerlink" href="#ansible-playbook" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="line-block">
+<div class="line">Ansible Playbookのサンプルコードを紹介します。ここでは2台のコンピュータ間で簡単なPlaybook(ディレクトリ作成、Ping実行)を実施します。ここでAnsible Playbookの動作の概要を掴みましょう。</div>
+</div>
+<div class="line-block">
+<div class="line">また、今回使用するインベントリファイルと、main.ymlファイルが下記からダウンロードできます。使用する際は、IPアドレスを環境に合わせて変更して使用して下さい。</div>
+</div>
+<div class="line-block">
+<div class="line"><a class="reference download internal" href="_downloads/hosts" download=""><code class="xref download docutils literal"><span class="pre">hosts</span></code></a></div>
+<div class="line"><a class="reference download internal" href="_downloads/main.yml" download=""><code class="xref download docutils literal"><span class="pre">main.yml</span></code></a></div>
+</div>
+<p>Ansible Plabybookサンプル</p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">###Ansibleサーバー ###</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ip a | grep inet</span>
+    inet <span class="m">10</span>.5.3.149/21 brd <span class="m">10</span>.5.7.255 scope global ens33
+<span class="c1">#今回は10.5.3.149から10.5.3.150に向けてAnsibleを実行します。</span>
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ls</span>
+hosts  main.retry  main.yml
+<span class="c1">#インベントリファイルとmain.ymlファイルを見ていきます。</span>
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat hosts</span>
+<span class="o">[</span>test<span class="o">]</span>
+host0.example.org <span class="nv">ansible_host</span><span class="o">=</span><span class="m">10</span>.5.3.150
+<span class="c1">#インベントリファイルにはターゲットのIPアドレスが記載されています。[test]はグループ名となります。</span>
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat main.yml</span>
+---
+- hosts: <span class="nb">test</span>
+  tasks:
+   - name: make <span class="nb">test</span> directory
+     file:
+      path: /tmp/test01
+      state: directory
+      mode: <span class="m">755</span>
+
+   - name: ping <span class="nb">test</span> host
+     shell: ping -c <span class="m">3</span> <span class="m">10</span>.5.3.150
+<span class="c1">#main.ymlファイルには処理が記述されています。</span>
+<span class="c1">#今回はターゲットの/tmp/にtest01というディレクトリを作成後、pingを3回実行する処理を記述しています。</span>
+
+
+<span class="c1">###Ansibleターゲット###</span>
+<span class="o">[</span>root@localhost tmp<span class="o">]</span><span class="c1"># ip a | grep inet</span>
+    inet <span class="m">10</span>.5.3.150/21 brd <span class="m">10</span>.5.7.255 scope global ens33
+<span class="o">[</span>root@localhost tmp<span class="o">]</span><span class="c1"># ls /tmp/</span>
+<span class="c1">#ターゲットの/tmp/ディレクトリにはまだファイルが存在していません。</span>
+
+
+<span class="c1">###Ansibleサーバー###</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook -i /etc/naansible/hosts /etc/ansible/main.yml</span>
+
+PLAY <span class="o">[</span>test<span class="o">]</span> ********************************************************************
+
+TASK <span class="o">[</span>setup<span class="o">]</span> *******************************************************************
+ok: <span class="o">[</span>host0.example.org<span class="o">]</span>
+
+TASK <span class="o">[</span>make <span class="nb">test</span> directory<span class="o">]</span> *****************************************************
+changed: <span class="o">[</span>host0.example.org<span class="o">]</span>
+
+TASK <span class="o">[</span>ping <span class="nb">test</span> host<span class="o">]</span> **********************************************************
+changed: <span class="o">[</span>host0.example.org<span class="o">]</span>
+
+PLAY RECAP *********************************************************************
+host0.example.org          : <span class="nv">ok</span><span class="o">=</span><span class="m">3</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">2</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="c1">#Playbookを実行後、結果が表示されました。ターゲットにディレクトリが作成されたか確認します。</span>
+
+
+<span class="c1">###Ansibleターゲット###</span>
+<span class="o">[</span>root@localhost tmp<span class="o">]</span><span class="c1"># ll</span>
+合計 <span class="m">0</span>
+d-wxrw--wt <span class="m">2</span> root root <span class="m">6</span>  <span class="m">7</span>月 <span class="m">24</span> <span class="m">08</span>:45 test01
+<span class="c1">#新たにtest01ディレクトリが作成されたようです。もう一度Plybookを実行して見ます。</span>
+
+
+<span class="c1">###Ansibleサーバー###</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook -i /etc/ansible/hosts /etc/ansible/main.yml</span>
+
+PLAY <span class="o">[</span>test<span class="o">]</span> ********************************************************************
+
+TASK <span class="o">[</span>setup<span class="o">]</span> *******************************************************************
+ok: <span class="o">[</span>host0.example.org<span class="o">]</span>
+
+TASK <span class="o">[</span>make <span class="nb">test</span> directory<span class="o">]</span> *****************************************************
+ok: <span class="o">[</span>host0.example.org<span class="o">]</span>
+
+TASK <span class="o">[</span>ping <span class="nb">test</span> host<span class="o">]</span> **********************************************************
+changed: <span class="o">[</span>host0.example.org<span class="o">]</span>
+
+PLAY RECAP *********************************************************************
+host0.example.org          : <span class="nv">ok</span><span class="o">=</span><span class="m">3</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="c1">#今後は結果のchangedが2⇒1に減少しています。既にディレクトリが作成されており、処理が行われなかった為です。</span>
+<span class="c1">#ターゲットのディレクトリを確認します。</span>
+
+
+<span class="c1">###Ansibleターゲット###</span>
+<span class="o">[</span>root@localhost tmp<span class="o">]</span><span class="c1"># ll</span>
+合計 <span class="m">0</span>
+d-wxrw--wt <span class="m">2</span> root root <span class="m">6</span>  <span class="m">7</span>月 <span class="m">24</span> <span class="m">08</span>:45 test01
+<span class="c1">#ディレクトリはPlaybookを2回実行しても変化がありません。Ansibleの特徴である冪等性を保持しています。</span>
+
+<span class="c1">#比較のためにPingモジュールを今回は使用しています。</span>
+<span class="c1">#Pingは毎回実行されるため、Playbookを何度実行しても結果はchangedになることが分かります。</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="playbook">
+<h2>ログ収集Playbook<a class="headerlink" href="#playbook" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ansibleを使用したターゲットからログ収集を行うPlaybookを紹介します。</p>
+<p>1.まず下記リンクよりファイルをダウンロードします。</p>
+<p><a class="reference download internal" href="_downloads/collect_logs.zip" download=""><code class="xref download docutils literal"><span class="pre">collect_logs</span></code></a></p>
+<p>2.解凍し、「collect_logs」ディレクトリを <code class="docutils literal"><span class="pre">/etc/ansible/</span></code> にディレクトリごと格納します。</p>
+<p>ディレクトリ構造</p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>/etc/ansible/collect_logs/
+
+  hosts
+  main.yml
+
+  roles/testservers/tasks
+
+  main.yml
+</pre></div>
+</td></tr></table></div>
+<p>3.インベントリファイルの対象サーバを編集します。</p>
+<p>4.Playbookを実行します。</p>
+<p><code class="docutils literal"><span class="pre">#</span> <span class="pre">ansible-playbook</span> <span class="pre">-i</span> <span class="pre">/etc/ansible/collect_logs/hosts</span> <span class="pre">/etc/ansible/collect_logs/main.yml</span></code></p>
+<p>5.ローカルサーバにログが収集されていることを確認しましょう。</p>
+<p><code class="docutils literal"><span class="pre">#</span> <span class="pre">ls</span> <span class="pre">-a</span> <span class="pre">/var/log/ansible-collect-logs/</span></code></p>
+</div>
+<div class="section" id="id7">
+<h2>システム情報収集Playbook<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ansibleを使用したターゲットからシステム情報収集を行うPlaybookを紹介します。</p>
+<p>1.まず下記リンクよりファイルをダウンロードします。</p>
+<p><a class="reference download internal" href="_downloads/compare_configs.zip" download=""><code class="xref download docutils literal"><span class="pre">compare_configs</span></code></a></p>
+<p>2.解凍し、「compare_configs」ディレクトリを <code class="docutils literal"><span class="pre">/etc/ansible/</span></code> にディレクトリごと格納します。</p>
+<blockquote>
+<div><p>ディレクトリ構造</p>
+<div class="highlight-bash"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span>/etc/ansible/compare_configs/
+
+  create-config.sh
+  hosts
+  main.yml
+
+  roles/testservers/tasks
+
+  main.yml
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>3.インベントリファイルの対象サーバを編集します。</p>
+<p>4.Playbookを実行します。</p>
+<p><code class="docutils literal"><span class="pre">#</span> <span class="pre">ansible-playbook</span> <span class="pre">-i</span> <span class="pre">/etc/ansible/compare_configs/hosts</span> <span class="pre">/etc/ansible/compare_configs/main.yml</span></code></p>
+<p>5.ローカルサーバにシステム情報が収集されていることを確認しましょう。</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">#</span> <span class="pre">ls</span> <span class="pre">-a</span> <span class="pre">/var/log/ansible-compare-configs/</span></code></div></blockquote>
+</div>
+<div class="section" id="id8">
+<h2>Playbook実行結果<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Playbookが実行されると最後に結果が表示されます。</p>
+<table border="1" class="colwidths-given docutils" id="id13">
+<caption><span class="caption-text"><strong>Playbook実行結果</strong></span><a class="headerlink" href="#id13" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col width="20%" />
+<col width="40%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">判定項目</th>
+<th class="head">説明</th>
+<th class="head">判定結果</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>OK</td>
+<td>定義された状態となっている</td>
+<td>数値:処理タスク数</td>
+</tr>
+<tr class="row-odd"><td>Changed</td>
+<td>定義された状態に変更が行われた</td>
+<td>数値:処理タスク数</td>
+</tr>
+<tr class="row-even"><td>Unreachable</td>
+<td>リモートホストへの接続結果判定</td>
+<td>0=正常処理・1=異常処理</td>
+</tr>
+<tr class="row-odd"><td>Failed</td>
+<td>タスクの実行結果判定</td>
+<td>0=正常処理・1=異常処理</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id9">
+<h2>トラブルシューティング<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Ansibleのトラブルシューティングについていくつか紹介します。</p>
+<ol class="arabic simple">
+<li>結果がunreachable(疎通不可)となる。</li>
+</ol>
+<div class="line-block">
+<div class="line">⇒ SSH出来るようにしましょう。</div>
+<div class="line">・対象サーバにSSHは可能ですか？</div>
+<div class="line">・.ssh/known_hostsに対象サーバの記載がありますか？</div>
+<div class="line">・.ssh/known_hostsの対象サーバの記載は古くありませんか？</div>
+<div class="line">・pingは通りますか？</div>
+<div class="line">・SSHするユーザーは正しく存在するユーザーですか？</div>
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>結果がfailedとなる。</li>
+</ol>
+<div class="line-block">
+<div class="line">⇒ failedには様々な原因が考えられます。まずはPlaybookコマンドに <code class="docutils literal"><span class="pre">-vvv</span></code> をつけてデバッグしてみましょう。</div>
+<div class="line">・例: <code class="docutils literal"><span class="pre">#</span> <span class="pre">ansible-playbook</span> <span class="pre">-vvv</span> <span class="pre">-i</span> <span class="pre">/etc/ansible/collect_logs/hosts</span> <span class="pre">/etc/ansible/collect_logs/main.yml</span></code></div>
+<div class="line">・原因が判明したら、その原因を取り除きます。</div>
+<div class="line">・その他構文エラーも多く見られます。一度Playbookを見直してみましょう。</div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="ansible-galaxy">
+<h2>Ansible Galaxy<a class="headerlink" href="#ansible-galaxy" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="line-block">
+<div class="line">AnsibleにはGalaxyと呼ばれるユーザー同士がPlaybookをシェアできるサイトがあります。</div>
+<div class="line">また、ここではシェアされたPlaybookをインストールすることも可能です。</div>
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div>Ansible Galaxy :<a class="reference external" href="https://galaxy.ansible.com/">https://galaxy.ansible.com/</a></div></blockquote>
+<ul class="simple">
+<li>使い方</li>
+</ul>
+<div class="line-block">
+<div class="line">Ansibleをインストールした際に <code class="docutils literal"><span class="pre">ansible-galaxy</span></code> コマンドも同時にインストールされています。</div>
+<div class="line">下記コマンドを使い、playbookやrolesをインストールすることが出来ます。</div>
+<div class="line"><code class="docutils literal"><span class="pre">ansible-galaxy</span> <span class="pre">install</span> <span class="pre">username.role_name</span></code></div>
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/Ansible_Galaxy.PNG"><img alt="_images/Ansible_Galaxy.PNG" src="_images/Ansible_Galaxy.PNG" style="width: 752.5px; height: 405.0px;" /></a>
+<div class="admonition hint">
+<p class="first admonition-title">ヒント</p>
+<p class="last">サイトには多くのPlaybookやrolesがあります。色々探してみて、Playbook作成に役立てましょう。</p>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>リリースノート<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<blockquote>
+<div><p>Ansibleのリリースノートを下記に記します。バージョンに関する各種情報は概ね手に入れられるでしょう。</p>
+<p>Ansible Changes By Release :<a class="reference external" href="https://github.com/ansible/ansible/blob/devel/CHANGELOG.md">https://github.com/ansible/ansible/blob/devel/CHANGELOG.md</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="id11">
+<h2>バージョン<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<blockquote>
+<div><p>Ansibleの各バージョンダウンロードリンクを下記に記します。下記より希望のバージョンをダウンロードしましょう。</p>
+<p>Ansible Releases :<a class="reference external" href="https://github.com/ansible/ansible/releases">https://github.com/ansible/ansible/releases</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="id12">
+<h2>イシュー<a class="headerlink" href="#id12" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<blockquote>
+<div><p>Ansibleにはバグなど問題がまだまだあります。何か不具合など発見した場合、Googleや下記から問題を探し出すと、解決方法が見つかるかもしれません。</p>
+<p>Ansible Issues :<a class="reference external" href="https://github.com/ansible/ansible-modules-core/issues">https://github.com/ansible/ansible-modules-core/issues</a></p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="コマンド集.html" title="コマンド集"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="reST記法のまとめ.html" title="reST記法のまとめ"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">manual 0.1 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, HN.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3 で生成しました。
+    </div>
+  </body>
+</html>

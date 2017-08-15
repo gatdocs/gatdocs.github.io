@@ -1,0 +1,406 @@
+=========================
+Ansible
+=========================
+
+はじめに
+==========
+本ドキュメントは構成管理ツールであるAnsibleの導入手順について説明したものとなります。
+
+インストール手順
+==================
+.. note::
+
+ | 本手順はCentOS7.2を想定して書かれています。
+ | 尚、作業の際はrootで作業することを想定しています。
+ | 事前にOSが正常にセットアップされているものとします。
+
+1. YUMリポジトリにEPELを追加
+
+``# yum install -y epel-release``
+
+2. Ansibleのインストール
+
+``# yum install -y --enablerepo=epel ansible``
+
+3. バージョンの確認
+
+``# ansible --version``
+
+4. Ansibleの動作確認
+
+``# ansible -m ping 127.0.0.1``
+
+.. hint::
+
+ 結果に **SUCCESS** が表示されていること
+
+
+.. note::
+
+ | バージョンを指定してインストールする場合、別途手順となります。
+ | 詳細は下記を参照のこと。
+ | 参照先:http://docs.ansible.com/ansible/intro_installation.html#latest-release-via-yum
+
+Ansibleのメリット
+==========================
+
+Ansibleには下記のような利点があります。このことからAnsibleは構成管理ツールとして優位性があると考えられます。
+
+- 冪等性
+- エージェントレス
+- モジュールによる拡張
+- コードがシンプル
+
+Ansibleの構成要素
+==========================
+
+Ansibleを使いこなすにあたって特に重要な3つの要素を記載します。
+
+- インベントリファイル
+
+Ansibleの実行対象を記述したファイルとなります。 ``/etc/ansible/hosts`` に下記を追記します。 ::
+
+  [testservers]
+  test01 ansible_host="対象サーバのIPアドレス"
+
+``ansible all -m ping`` を実行し、対象サーバが **SUCCESS** となることを確認しましょう。
+
+- Playbook
+
+Ansibleの実行処理をコードで記述したものとなります。このYML形式のコードを元にAnsibleは処理を実行します。
+
+- コンフィグファイル
+
+| Ansibleの設定情報が記載されています。
+| 設定変更が必要な際 ``/etc/ansible/ansible.cfg`` を編集します。
+|
+
+ベストプラクティス
+==========================
+
+Playbookを作成するうえで、可読性、運用性を高めるために最適なディレクトリ構造があります。作成にとりかかる前に理解をしておきましょう。 
+
+- ディレクトリ構造
+
+公式ドキュメントより:http://docs.ansible.com/ansible/playbooks_best_practices.html ::
+
+  production                # inventory file for production servers
+  staging                   # inventory file for staging environment
+
+  group_vars/
+     group1                 # here we assign variables to particular groups
+     group2                 # ""
+  host_vars/
+     hostname1              # if systems need specific variables, put them here
+     hostname2              # ""
+
+  library/                  # if any custom modules, put them here (optional)
+  filter_plugins/           # if any custom filter plugins, put them here (optional)
+
+  site.yml                  # master playbook
+  webservers.yml            # playbook for webserver tier
+  dbservers.yml             # playbook for dbserver tier
+
+  roles/
+      common/               # this hierarchy represents a "role"
+          tasks/            #
+              main.yml      #  <-- tasks file can include smaller files if warranted
+          handlers/         #
+              main.yml      #  <-- handlers file
+          templates/        #  <-- files for use with the template resource
+              ntp.conf.j2   #  <------- templates end in .j2
+          files/            #
+              bar.txt       #  <-- files for use with the copy resource
+              foo.sh        #  <-- script files for use with the script resource
+          vars/             #
+              main.yml      #  <-- variables associated with this role
+          defaults/         #
+              main.yml      #  <-- default lower priority variables for this role
+          meta/             #
+              main.yml      #  <-- role dependencies
+          library/          # roles can also include custom modules
+          lookup_plugins/   # or other types of plugins, like lookup in this case
+
+      webtier/              # same kind of structure as "common" was above, done for the webtier role
+      monitoring/           # ""
+      fooapp/               # ""
+
+モジュール
+==========================
+
+Playbookはモジュールを組み合わせて作成されます。モジュールの一覧は公式ドキュメントにありますが、見難いので代表的なものをピックアップします。
+
+公式ドキュメント:http://docs.ansible.com/ansible/modules_by_category.html
+
+- file
+
+ファイルやシンボリックリンクやディレクトリを作成したり、削除したり、属性変更するモジュール。
+ 
+- copy
+
+ローカルにあるファイルやディレクトリを、対象サーバにコピーする。
+
+- shell
+
+クライアント側でコマンドを実行する。
+
+- fetch
+
+対象サーバからローカルにファイルを取得する。Copyモジュールとの違いに注意。
+
+Ansible Playbookサンプル
+==========================
+
+| Ansible Playbookのサンプルコードを紹介します。ここでは2台のコンピュータ間で簡単なPlaybook(ディレクトリ作成、Ping実行)を実施します。ここでAnsible Playbookの動作の概要を掴みましょう。
+
+| また、今回使用するインベントリファイルと、main.ymlファイルが下記からダウンロードできます。使用する際は、IPアドレスを環境に合わせて変更して使用して下さい。
+
+| :download:`hosts<./_downloads/hosts>`
+| :download:`main.yml<./_downloads/main.yml>`
+
+
+.. highlight:: bash
+   :linenothreshold: 5
+
+Ansible Plabybookサンプル ::
+
+ ###Ansibleサーバー ###
+ [root@localhost ansible]# ip a | grep inet
+     inet 10.5.3.149/21 brd 10.5.7.255 scope global ens33
+ #今回は10.5.3.149から10.5.3.150に向けてAnsibleを実行します。
+
+ [root@localhost ansible]# ls
+ hosts  main.retry  main.yml
+ #インベントリファイルとmain.ymlファイルを見ていきます。
+
+ [root@localhost ansible]# cat hosts 
+ [test]
+ host0.example.org ansible_host=10.5.3.150
+ #インベントリファイルにはターゲットのIPアドレスが記載されています。[test]はグループ名となります。
+
+ [root@localhost ansible]# cat main.yml 
+ ---
+ - hosts: test
+   tasks:
+    - name: make test directory
+      file: 
+       path: /tmp/test01
+       state: directory
+       mode: 755
+
+    - name: ping test host
+      shell: ping -c 3 10.5.3.150
+ #main.ymlファイルには処理が記述されています。
+ #今回はターゲットの/tmp/にtest01というディレクトリを作成後、pingを3回実行する処理を記述しています。
+
+
+ ###Ansibleターゲット###
+ [root@localhost tmp]# ip a | grep inet
+     inet 10.5.3.150/21 brd 10.5.7.255 scope global ens33
+ [root@localhost tmp]# ls /tmp/
+ #ターゲットの/tmp/ディレクトリにはまだファイルが存在していません。
+
+
+ ###Ansibleサーバー###
+ [root@localhost ansible]# ansible-playbook -i /etc/naansible/hosts /etc/ansible/main.yml 
+
+ PLAY [test] ********************************************************************
+
+ TASK [setup] *******************************************************************
+ ok: [host0.example.org]
+
+ TASK [make test directory] *****************************************************
+ changed: [host0.example.org]
+
+ TASK [ping test host] **********************************************************
+ changed: [host0.example.org]
+
+ PLAY RECAP *********************************************************************
+ host0.example.org          : ok=3    changed=2    unreachable=0    failed=0   
+ #Playbookを実行後、結果が表示されました。ターゲットにディレクトリが作成されたか確認します。
+
+
+ ###Ansibleターゲット###
+ [root@localhost tmp]# ll
+ 合計 0
+ d-wxrw--wt 2 root root 6  7月 24 08:45 test01
+ #新たにtest01ディレクトリが作成されたようです。もう一度Plybookを実行して見ます。
+
+
+ ###Ansibleサーバー###
+ [root@localhost ansible]# ansible-playbook -i /etc/ansible/hosts /etc/ansible/main.yml 
+
+ PLAY [test] ********************************************************************
+
+ TASK [setup] *******************************************************************
+ ok: [host0.example.org]
+
+ TASK [make test directory] *****************************************************
+ ok: [host0.example.org]
+
+ TASK [ping test host] **********************************************************
+ changed: [host0.example.org]
+
+ PLAY RECAP *********************************************************************
+ host0.example.org          : ok=3    changed=1    unreachable=0    failed=0   
+ #今後は結果のchangedが2⇒1に減少しています。既にディレクトリが作成されており、処理が行われなかった為です。
+ #ターゲットのディレクトリを確認します。
+
+
+ ###Ansibleターゲット###
+ [root@localhost tmp]# ll
+ 合計 0
+ d-wxrw--wt 2 root root 6  7月 24 08:45 test01
+ #ディレクトリはPlaybookを2回実行しても変化がありません。Ansibleの特徴である冪等性を保持しています。
+   
+ #比較のためにPingモジュールを今回は使用しています。
+ #Pingは毎回実行されるため、Playbookを何度実行しても結果はchangedになることが分かります。
+
+
+ログ収集Playbook
+==========================
+
+Ansibleを使用したターゲットからログ収集を行うPlaybookを紹介します。
+
+1.まず下記リンクよりファイルをダウンロードします。
+
+:download:`collect_logs<./_downloads/collect_logs.zip>`
+
+2.解凍し、「collect_logs」ディレクトリを ``/etc/ansible/`` にディレクトリごと格納します。
+
+ディレクトリ構造 ::
+
+  /etc/ansible/collect_logs/
+
+    hosts
+    main.yml
+  
+    roles/testservers/tasks
+  
+    main.yml
+  
+3.インベントリファイルの対象サーバを編集します。
+
+
+4.Playbookを実行します。
+
+``# ansible-playbook -i /etc/ansible/collect_logs/hosts /etc/ansible/collect_logs/main.yml``
+
+5.ローカルサーバにログが収集されていることを確認しましょう。
+
+``# ls -a /var/log/ansible-collect-logs/``
+
+システム情報収集Playbook
+==========================
+
+Ansibleを使用したターゲットからシステム情報収集を行うPlaybookを紹介します。
+
+1.まず下記リンクよりファイルをダウンロードします。
+
+:download:`compare_configs<./_downloads/compare_configs.zip>`
+
+2.解凍し、「compare_configs」ディレクトリを ``/etc/ansible/`` にディレクトリごと格納します。
+
+ ディレクトリ構造 ::
+
+  /etc/ansible/compare_configs/
+
+    create-config.sh
+    hosts
+    main.yml
+    
+    roles/testservers/tasks
+  
+    main.yml
+  
+3.インベントリファイルの対象サーバを編集します。
+
+4.Playbookを実行します。
+
+``# ansible-playbook -i /etc/ansible/compare_configs/hosts /etc/ansible/compare_configs/main.yml``
+
+5.ローカルサーバにシステム情報が収集されていることを確認しましょう。
+
+ ``# ls -a /var/log/ansible-compare-configs/``
+
+Playbook実行結果
+==========================
+
+Playbookが実行されると最後に結果が表示されます。
+
+.. csv-table:: **Playbook実行結果**
+ :header: "判定項目", "説明", "判定結果"
+ :widths: 10, 20, 20
+
+ "OK", "定義された状態となっている", "数値:処理タスク数"
+ "Changed", "定義された状態に変更が行われた", "数値:処理タスク数"
+ "Unreachable", "リモートホストへの接続結果判定", "0=正常処理・1=異常処理"
+ "Failed", "タスクの実行結果判定", "0=正常処理・1=異常処理"
+
+トラブルシューティング
+==========================
+
+Ansibleのトラブルシューティングについていくつか紹介します。
+
+1. 結果がunreachable(疎通不可)となる。
+
+| ⇒ SSH出来るようにしましょう。
+| ・対象サーバにSSHは可能ですか？
+| ・.ssh/known_hostsに対象サーバの記載がありますか？
+| ・.ssh/known_hostsの対象サーバの記載は古くありませんか？
+| ・pingは通りますか？
+| ・SSHするユーザーは正しく存在するユーザーですか？
+|
+
+2. 結果がfailedとなる。
+
+| ⇒ failedには様々な原因が考えられます。まずはPlaybookコマンドに ``-vvv`` をつけてデバッグしてみましょう。
+| ・例: ``# ansible-playbook -vvv -i /etc/ansible/collect_logs/hosts /etc/ansible/collect_logs/main.yml``
+| ・原因が判明したら、その原因を取り除きます。
+| ・その他構文エラーも多く見られます。一度Playbookを見直してみましょう。
+| 
+
+
+Ansible Galaxy
+==========================
+
+| AnsibleにはGalaxyと呼ばれるユーザー同士がPlaybookをシェアできるサイトがあります。
+| また、ここではシェアされたPlaybookをインストールすることも可能です。
+|
+
+ Ansible Galaxy :https://galaxy.ansible.com/
+
+- 使い方
+
+| Ansibleをインストールした際に ``ansible-galaxy`` コマンドも同時にインストールされています。
+| 下記コマンドを使い、playbookやrolesをインストールすることが出来ます。
+| ``ansible-galaxy install username.role_name``
+|
+
+.. image:: ./_static/image/Ansible_Galaxy.PNG
+   :scale: 50%   
+
+.. hint::
+
+  サイトには多くのPlaybookやrolesがあります。色々探してみて、Playbook作成に役立てましょう。
+
+リリースノート
+==========================
+
+ Ansibleのリリースノートを下記に記します。バージョンに関する各種情報は概ね手に入れられるでしょう。
+
+ Ansible Changes By Release :https://github.com/ansible/ansible/blob/devel/CHANGELOG.md
+
+バージョン
+==========================
+
+ Ansibleの各バージョンダウンロードリンクを下記に記します。下記より希望のバージョンをダウンロードしましょう。
+
+ Ansible Releases :https://github.com/ansible/ansible/releases
+
+イシュー
+==========================
+
+ Ansibleにはバグなど問題がまだまだあります。何か不具合など発見した場合、Googleや下記から問題を探し出すと、解決方法が見つかるかもしれません。
+
+ Ansible Issues :https://github.com/ansible/ansible-modules-core/issues

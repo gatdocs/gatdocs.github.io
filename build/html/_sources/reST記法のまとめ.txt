@@ -1,0 +1,592 @@
+=========================
+reST記法のまとめ
+=========================
+
+はじめに
+==========
+本ドキュメントはドキュメントを記述する際に使用するreStructuredTextをまとめたものとなります。尚、本ドキュメントは記述の際の参考文書と位置づけています。詳細については `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ 及び `reStructuredText入門 <http://docs.sphinx-users.jp/rest.html>`_ を参照して下さい。
+
+
+インラインマークアップ
+======================
+
+インラインマークアップは、文章中の単語や文節に文字スタイル（斜体や太字等）と機能（ハイパーリンク等）を与えます。
+
+.. list-table:: インラインマークアップ
+   :header-rows: 1
+   :widths: 20 20 50
+
+   * - プレーンテキスト
+     - 表示
+     - ノート
+
+   * - .. code-block:: none
+
+          *強調*
+     - *強調*
+     - イタリック（斜体）として表示されます
+
+   * - .. code-block:: none
+
+          **強い強調**
+     - **強い強調**
+     - ボールド（太字）として表示されます
+
+   * - .. code-block:: none
+
+          `用語テキスト`
+     - `用語テキスト`
+     - ドメイン又はアプリケーション固有の意味をもつテキストとして表示されます。
+       索引のエントリや（プログラム識別子のような）明示的記述的マークアップとして利用できます
+
+   * - .. code-block:: none
+
+          ``インラインリテラル``
+     - ``インラインリテラル``
+     - 等幅テキストとして表示されます。空白（スペース）は保持されますが、改行は保持されません
+
+   * - .. code-block:: none
+
+          reference_
+     - reference_
+     - シンプルな、１ワードのハイパーリンク参照です。 `ハイパーリンクターゲット`_ を参照して下さい
+
+   * - .. code-block:: none
+
+          `フレーズ参照`_
+     - `フレーズ参照`_
+     - 空白や記号を伴うハイパーリンク参照はバッククォートで括る必要があります。
+       `ハイパーリンクターゲット`_ を参照して下さい
+
+   * - .. code-block:: none
+
+          anonymous__
+     - anonymous__
+     - ハイパーリンク参照のアンダースコアが２つの場合は、匿名参照です。
+       `ハイパーリンクターゲット`_ を参照して下さい
+
+   * - .. code-block:: none
+
+          _`インライン内部ターゲット`
+     - _`インライン内部ターゲット`
+     - テキストの相互参照をします。
+       `ハイパーリンクターゲット`_ を参照して下さい
+
+   * - .. code-block:: none
+
+          |置換参照|
+     - (右のノート参照)
+     - 置換定義で定義された内容に置換されます。
+       テキスト、画像、ハイパーリンクもしくはそれらを組み合わせたものを
+       置き換えることができます
+
+   * - .. code-block:: none
+
+          脚注参照 [1]_
+     - `脚注参照`_
+     - `脚注参照`_ を参照してください
+
+   * - .. code-block:: none
+
+          引用参照 [CIT2002]_
+     - `引用参照`_
+     - `引用参照`_ を参照してください
+
+   * - .. code-block:: none
+
+          http://docutils.sf.net/
+     - http://docutils.sf.net/
+     - 一般的なハイパーリンクです
+
+アスタリスク ('\*') 、バッククォート ('\`') 、バーティカルバー ('\|') 及び
+アンダースコア ('\_') はインラインの区切り文字です。
+アスタリスク、バッククォート及びバーティカルバーは引用符のようにマークアップする
+単語やフレーズを対応する記号で囲みます。空白や他の引用符はそれらの外にある必要が
+あり、引用符の直ぐ内側に空白を含めることはできません。
+もし文字そのものとしてこれらインライン区切り文字を利用する場合には、
+エスケープする (バックスラッシュを用いる) か、それらを引用 (二重バッククォートを
+用いる、すなわちインラインリテラルを利用する) します。
+
+
+.. _escaping-with-backslashes:
+
+バックスラッシュによるエスケープ
+================================
+
+reStructuredText は特別な意味をもつマークアップ文字を上書きして、文字そのものを
+用いるためにバックスラッシュ ('\\') を使います。
+バックスラッシュそのものを使うには、バックスラッシュでエスケープします ('\\\\') 。
+
+.. list-table::
+   :header-rows: 1
+   :widths: 100 100
+
+   * - 元のreStructuredText
+     - 表示結果
+
+   * - .. code-block:: none
+
+          *escape* ``with`` "\"
+     - *escape* ``with`` "\"
+
+   * - .. code-block:: none
+
+          \*escape* \``with`` "\\"
+     - \*escape* \``with`` "\\"
+
+もちろん、Pythonの文字列でも正しく reStructuredText になるように、
+全てのバックスラッシュをエスケープする必要があります。
+
+.. list-table::
+   :header-rows: 1
+   :widths: 100 100
+
+   * - Pythonの文字列
+     - 表示結果
+
+   * - .. code-block:: none
+
+          r"""\*escape* \`with` "\\""""
+     - \*escape* \``with`` "\\"
+
+   * - .. code-block:: none
+
+          """\\*escape* \\`with` "\\\\""""
+     - \*escape* \``with`` "\\"
+
+   * - .. code-block:: none
+
+          """\*escape* \`with` "\\""""
+     - *escape* ``with`` "\"
+
+
+.. _section-structure:
+
+セクション構造
+==============
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: section-structure.txt
+     - .. include:: section-structure.txt
+
+.. _paragraphs:
+
+段落
+====
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: paragraphs.txt
+     - .. include:: paragraphs.txt
+
+
+.. _bullet-lists:
+
+箇条書きリスト
+==============
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: bullet-lists.txt
+     - .. include:: bullet-lists.txt
+
+
+.. _enumerated-lists:
+
+列挙リスト
+==========
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: enumerated-lists.txt
+     - .. include:: enumerated-lists.txt
+
+
+.. _definition-lists:
+
+定義リスト
+==========
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: definition-lists.txt
+     - .. include:: definition-lists.txt
+
+
+.. _field-lists:
+
+フィールドリスト
+================
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: field-lists.txt
+     - .. include:: field-lists.txt
+
+
+.. _option-lists:
+
+オプションリスト
+================
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: option-lists.txt
+     - .. include:: option-lists.txt
+
+
+.. _literal-blocks:
+
+リテラルブロック
+================
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: literal-blocks.txt
+     - .. include:: literal-blocks.txt
+
+
+.. _line-blocks:
+
+ラインブロック
+==============
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: line-blocks.txt
+     - .. include:: line-blocks.txt
+
+
+.. _block-quotes:
+
+引用ブロック
+============
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: block-quotes.txt
+     - .. include:: block-quotes.txt
+
+
+.. _doctest-blocks:
+
+Doctestブロック
+===============
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: doctest-blocks.txt
+     - .. include:: doctest-blocks.txt
+
+
+.. _tables:
+
+テーブル
+========
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: grid-table.txt
+     - .. include:: grid-table.txt
+
+   * - .. literalinclude:: simple-table.txt
+     - .. include:: simple-table.txt
+
+
+.. _transitions:
+
+切り替え
+========
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: transitions.txt
+     - .. include:: transitions.txt
+
+
+.. _explicit-markup:
+
+明示的マークアップ
+==================
+
+明示的マークアップブロックは注釈 (脚注)、直接的な紙媒体を持たないもの
+(ハイパーリンクターゲット、コメント)、特別な処理が必要なもの (ディレクティブ)を
+構成するために使います。これらはすべて２つのピリオドと空白、いわゆる
+"明示的なマークアップの開始" で始まります。
+
+.. _footnotes:
+
+脚注参照
+--------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: footnotes1.txt
+     - .. include:: footnotes1.txt
+
+   * - .. literalinclude:: footnotes2.txt
+     - .. include:: footnotes2.txt
+
+   * - .. literalinclude:: footnotes3.txt
+     - .. include:: footnotes3.txt
+
+自動採番の脚注の番号は、参照される順番ではなく脚注の (記述の) 順番で決まります。
+自動採番の脚注をラベルなしで使う場合、参照と脚注は相互に同じ順番になっている
+必要があります。自動シンボルの脚注の場合も同様です。
+
+
+.. _citations:
+
+引用参照
+--------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: citations.txt
+     - .. include:: citations.txt
+
+
+.. _reference:
+.. _`フレーズ参照`:
+.. _hyperlink-targets:
+
+ハイパーリンクターゲット
+------------------------
+
+.. _external-hyperlink-targets:
+
+外部ハイパーリンクターゲット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: external-hyperlink-targets1.txt
+     - .. include:: external-hyperlink-targets1.txt
+
+`埋め込み形式` はHTMLドキュメントへの表示に適した表示方法で、 `呼び出し形式` は
+リンクが明示的に表示される必要がある印刷したドキュメントに適しています。
+"target-form" ディレクティブを使うことによって、 `呼び出し形式` を使うことができます。
+
+reStructuredText は高い可読性を保つためにURLの埋込む方法も提供しています。
+かぎ括弧を使って、対象のURLを直接埋め込むことができます。
+以下は、上述の例と全く同じです。
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: external-hyperlink-targets2.txt
+     - .. include:: external-hyperlink-targets2.txt
+
+.. _internal-hyperlink-targets:
+
+内部ハイパーリンクターゲット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: internal-hyperlink-targets.txt
+     - .. include:: internal-hyperlink-targets.txt
+
+
+.. _indirect-hyperlink-targets:
+
+間接ハイパーリンクターゲット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: indirect-hyperlink-targets.txt
+     - .. include:: indirect-hyperlink-targets.txt
+
+二つ目のハイパーリンクターゲット ("__"から始まっている行) は間接ハイパーリンク
+ターゲット ("Python_"を参照することで Python公式Webサイトを間接的に指している)
+であり、暗黙ハイパーリンクターゲットでもあります。
+テキストの中の２重アンダースコア接尾辞は、匿名ハイパーリンク参照であることを
+示します。匿名ハイパーリンクターゲットでは、参照テキストは再現されません。
+これは長いテキストや使い捨ての参照には便利ですが、同期が取れなくなってしまわない
+ように参照先の近くに保持しておくようにすべきです。
+
+
+.. _implicit-hyperlink-targets:
+
+暗黙的ハイパーリンクターゲット
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+セクションタイトル、脚注、引用は自動的にハイパーリンクが生成されます
+(タイトルテキストや脚注/引用ラベルをハイパーリンク名として使います) 。
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. code-block:: none
+
+          Implicit references, like `reStructuredText`_.
+     - Implicit references, like `reStructuredText`_.
+
+
+.. _directives:
+
+ディレクティブ
+==============
+
+ディレクティブは汎用の拡張メカニズムで、新しい文法を追加することなく
+新しい構造のサポートを追加する方法です。
+標準のディレクティブの説明は `reStructuredText Derectives`_ を参照してください。
+
+.. _`reStructuredText Derectives`: http://docutils.sourceforge.net/docs/ref/rst/directives.html
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. code-block:: none
+
+          .. image:: _static/image/ball1.gif
+     - .. image:: _static/image/ball1.gif
+
+
+.. _substitution-references-and-definitions:
+
+置換参照と定義
+==============
+
+置換は画像や任意の構造物をテキストに埋め込む、インラインディレクティブのようなものです。
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: substitution-references-and-definitions.txt
+     - .. include:: substitution-references-and-definitions.txt
+
+
+.. _comments:
+
+コメント
+========
+
+明示的マークアップで始まっていて上述のいずれの文法も使っていない構造体は
+全てコメントです。
+
+.. list-table::
+   :header-rows: 1
+   :widths: 80 100
+
+   * - プレーンテキスト
+     - 表示結果
+
+   * - .. literalinclude:: comment1.txt
+     - .. include:: comment1.txt
+
+   * - .. literalinclude:: comment2.txt
+     - .. include:: comment2.txt
+
+
+__ reference_
+
+.. END

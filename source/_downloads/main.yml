@@ -1,0 +1,11 @@
+---
+- hosts: test
+  tasks:
+   - name: make test directory
+     file: 
+      path: /tmp/test01
+      state: directory
+      mode: 755
+
+   - name: ping test host
+     shell: ping -c 3 10.5.3.150
