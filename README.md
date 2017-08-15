@@ -1,2 +1,2 @@
 # gatdocs.github.io
-This is
+This is a repository for documents
