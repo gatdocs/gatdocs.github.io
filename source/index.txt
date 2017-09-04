@@ -1,4 +1,4 @@
-.. manual documentation master file, created by
+﻿.. manual documentation master file, created by
    sphinx-quickstart on Thu Jul 20 07:45:44 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -23,6 +23,70 @@ reST記法
    :maxdepth: 2
 
    reST記法のよく使うもの
+
+
+Linux[CentOS7]
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   CentOS7_Install
+
+
+Linux[CentOS7]
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   CentOS7_Install
+
+
+Linux[Debian9]
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   Debian9_Install
+
+
+WindowsServer[WindowsServer2016]
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   WindowsServer_Install
+
+
+Apache
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   ApacheWeb_Install
+
+
+PHP
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   PHP_Install
+
+
+MariaDB
+==================================
+
+.. toctree::
+   :maxdepth: 2
+
+   MariaDB_Install
+
 
 Ansible
 ==================================
